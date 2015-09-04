@@ -1,0 +1,43 @@
+.defaultDisplay(){
+	box-sizing: border-box;
+	position: relative;
+	border: 0 solid black;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	flex: 0 0 auto;
+}
+
+.defaultFont(){
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: 100;
+}
+
+// default style for the html document
+html, body, #app{
+  margin: 0;
+  padding: 0;
+
+  .defaultFont();
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* by default, react-native crops content */
+}
+
+// make React-added spans display as inline-block to avoid IE10 bug around flexbox and inline elements.
+// NOTE: they should be avoided by the way.
+// TODO: provide a way to warn the user about react-added spans
+span{
+  display: inline-block;
+}
+
+
+@import "components/View/style.less";
+@import "components/Text/style.less";

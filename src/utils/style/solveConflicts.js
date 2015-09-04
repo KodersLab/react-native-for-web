@@ -24,14 +24,14 @@ module.exports = (style) => {
 			// just because it will be a waste of calculations
 			var translateProps = mayConflictProps[propsKeys[i]];
 			for(var j = 0; j < translateProps.length; j++){
-				solvedStyle[translateProps[j]] = style[propsKeys[j]];
+				solvedStyle[translateProps[j]] = style[propsKeys[i]];
 			}
 		}else{
 			// there is no conflict possible, so just pass the style prop
 			solvedStyle[propsKeys[i]] = style[propsKeys[i]];
 		}
 	}
-	
+	console.log('solveConflict', solvedStyle);
 	// returns the new style object
 	return solvedStyle;
 };

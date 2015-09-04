@@ -1,0 +1,15 @@
+#app .view{
+	.defaultDisplay();
+	
+	// handle pointer events
+	&.pointer-events-none,
+	&.pointer-events-box-none,
+	&.pointer-events-box-only *{
+		pointer-events: none;
+	}
+	
+	&.pointer-events-box-none *,
+	&.pointer-events-box-only{
+		pointer-events: all;
+	}
+}

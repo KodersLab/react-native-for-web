@@ -1,0 +1,64 @@
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 100;
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  /* by default, react-native crops content */
+}
+span {
+  display: inline-block;
+}
+#app .view {
+  box-sizing: border-box;
+  position: relative;
+  border: 0 solid black;
+  margin: 0;
+  padding: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+#app .view.pointer-events-none,
+#app .view.pointer-events-box-none,
+#app .view.pointer-events-box-only * {
+  pointer-events: none;
+}
+#app .view.pointer-events-box-none *,
+#app .view.pointer-events-box-only {
+  pointer-events: all;
+}
+#app .text {
+  display: inline-block;
+}
+#app .text.suppress-highlighting {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+/*# sourceMappingURL=style.css.map */
