@@ -58,14 +58,14 @@ npm run build
    - [X] runApplication
 
  - [ ] View
-   - [ ] accessible
-   - [ ] accessibilityLabel
-   - [ ] accessibilityComponentType
-   - [ ] accessibilityLiveRegion
-   - [ ] accessibilityTraits
-   - [ ] onAcccessibilityTap
-   - [ ] onMagicTap
-   - [X] testID
+   - [X] accessible *not planned to support*
+   - [X] accessibilityLabel *not planned to support*
+   - [X] accessibilityComponentType *not planned to support*
+   - [X] accessibilityLiveRegion *not planned to support*
+   - [X] accessibilityTraits *not planned to support*
+   - [X] onAcccessibilityTap *not planned to support*
+   - [X] onMagicTap *not planned to support*
+   - [X] testID *not planned to support*
    - [ ] onMoveShouldSetResponder
    - [ ] onResponderGrant
    - [ ] onResponderMove
@@ -91,3 +91,19 @@ npm run build
    - [X] style
    - [X] testID
    - [ ] allowFontScaling
+
+ - [ ] Image
+   - [ ] onLayout
+   - [X] resizeMode
+   - [X] source
+   - [X] style
+   - [X] testID
+   - [X] accessibilityLabel *not planned to support*
+   - [X] accessible *not planned to support*
+   - [ ] capInsets
+   - [X] defaultSource
+   - [X] onError
+   - [X] onLoad
+   - [X] onLoadEnd
+   - [X] onLoadStart
+   - [X] onProgress
