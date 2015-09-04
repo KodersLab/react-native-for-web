@@ -1,0 +1,41 @@
+{
+  "name": "react-native-for-web",
+  "version": "0.0.1",
+  "description": "A set of classes and react components to make work your react-native app in a browser. (with some limitations obviously)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp styles && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KodersLab/react-native-for-web.git"
+  },
+  "keywords": [
+    "react",
+    "react-native"
+  ],
+  "author": "KodersLab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KodersLab/react-native-for-web/issues"
+  },
+  "homepage": "https://github.com/KodersLab/react-native-for-web#readme",
+  "dependencies": {
+    "eventemitter3": "^1.1.1",
+    "radium": "^0.13.8"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0-beta3"
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^5.2.1",
+    "babel-core": "^5.8.22",
+    "babel-loader": "^5.3.2",
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3",
+    "gulp-postcss": "^5.1.10",
+    "gulp-sourcemaps": "^1.5.2",
+    "webpack": "^1.11.0"
+  }
+}
