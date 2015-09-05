@@ -110,3 +110,88 @@ npm run build
    - [X] onLoadEnd
    - [X] onLoadStart
    - [X] onProgress
+   
+ - [ ] ScrollView
+   - [ ] alwaysBounceHorizontal
+   - [ ] alwaysBounceVertical
+   - [ ] automaticallyAdjustContentInsets
+   - [ ] bounces
+   - [ ] bouncesZoom
+   - [ ] canCancelContentTouches
+   - [ ] centerContent
+   - [X] contentContainerStyle
+   - [ ] contentInset
+   - [ ] contentOffset
+   - [ ] decelerationRate
+   - [ ] directionalLockEnabled
+   - [X] horizontal
+   - [ ] keyboardDismissMode
+   - [ ] keyboardShouldPersistTaps
+   - [ ] maximumZoomScale
+   - [ ] minimumZoomScale
+   - [ ] onScroll
+   - [ ] onScrollAnimationEnd
+   - [ ] pagingEnabled
+   - [ ] removeClippedSubviews
+   - [ ] scrollEnabled
+   - [ ] scrollEventThrottle
+   - [ ] scrollIndicatorInsets
+   - [ ] scrollsToTop
+   - [ ] showsHorizontalScrollIndicator
+   - [ ] showsVerticalScrollIndicator
+   - [ ] stickyHeaderIndices
+   - [X] style
+   - [ ] zoomScale
+
+ - [ ] TextInput
+   - [ ] autoCapitalize
+   - [ ] autoCorrect
+   - [X] autoFocus
+   - [ ] clearButtonMode
+   - [ ] clearTextOnFocus
+   - [X] defaultValue
+   - [ ] editable
+   - [ ] enablesReturnKeyAutomatically
+   - [ ] keyboardType
+   - [ ] maxLength
+   - [X] multiline
+   - [X] onBlur
+   - [X] onChange
+   - [X] onChangeText
+   - [ ] onEndEditing
+   - [X] onFocus
+   - [ ] onLayout
+   - [ ] onSubmitEditing
+   - [X] placeholder
+   - [ ] placeholderTextColor
+   - [ ] returnKeyType
+   - [ ] secureTextEntry
+   - [ ] selectTextOnFocus
+   - [ ] selectionState
+   - [X] style
+   - [X] testID
+   - [X] textAlign
+   - [ ] textAlignVertical
+   - [ ] underlineColorAndroid
+   - [X] value
+
+ - [ ] TouchableHighlight
+   - [ ] activeOpacity
+   - [ ] onHideUnderlay
+   - [ ] onShowUnderlay
+   - [X] style
+   - [ ] underlayColor
+
+ - [ ] TouchableOpacity
+   - [ ] ...TouchableWithoutFeedback properties
+   - [X] activeOpacity
+
+ - [ ] TouchableWithoutFeedback
+   - [ ] accessible
+   - [X] delayLongPress
+   - [X] delayPressIn
+   - [X] delayPressOut
+   - [X] onLongPress
+   - [X] onPress
+   - [X] onPressIn
+   - [X] onPressOut

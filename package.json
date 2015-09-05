@@ -1,6 +1,6 @@
 {
   "name": "react-native-for-web",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A set of classes and react components to make work your react-native app in a browser. (with some limitations obviously)",
   "main": "index.js",
   "scripts": {
