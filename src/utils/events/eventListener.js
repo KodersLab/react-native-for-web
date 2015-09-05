@@ -1,13 +1,21 @@
 // TODO: provide support for touch-enabled browsers instead of fallback to mouse events
 // a dictionary of supported events
-//var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
-// disable touch atm
-var SUPPORT_TOUCH = false;
+var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
+var SUPPORT_IE10_POINTERS = window.MSPointerEvent;
+var SUPPORT_POINTERS = window.PointerEvent;
+
 var MOUSE_POINTERS = {
 	pointerdown: 'mousedown',
 	pointerup: 'mouseup',
 	pointerout: 'mouseout',
 	pointermove: 'mousemove'
+};
+
+var TOUCH_POINTERS = {
+	pointerdown: 'touchstart',
+	pointerup: 'touchend',
+	pointerout: 'touchcancel',
+	pointermove: 'touchmove'
 };
 
 var IE10_POINTERS = {
@@ -34,13 +42,21 @@ function normalizeTouchEvent(e){
 function getEventName(event){
 	var events = {};
 	// there is support for pointer events in IE10
-	if(window.MSPointerEvent){
+	if(SUPPORT_IE10_POINTERS){
 		events = {
 			...events,
 			...IE10_POINTERS
-		}
-	// there is no pointer event support, falls to mouse events
-	}else if(!window.PointerEvent){
+		};
+	// there is pointer support, do nothing
+	}else if(SUPPORT_POINTERS){
+	// there is touch support
+	}else if(SUPPORT_TOUCH){
+		events = {
+			...events,
+			...TOUCH_POINTERS
+		};
+	// there is no support... mouse come at me!
+	}else{
 		events = {
 			...events,
 			...MOUSE_POINTERS
