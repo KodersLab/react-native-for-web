@@ -12,6 +12,9 @@ By the way we are planning to provide an extra folder that will contains polyfil
 
 ### Check out the examples!
 - [Sample App](http://koderslab.github.io/react-native-for-web/examples/SampleApp/)
+- [UIExplorer](http://koderslab.github.io/react-native-for-web/examples/UIExplorer/)
+
+NOTE: The main UIExplorer app has been changed since the official UIExplorer app includes native binary components and non supported components at the moment.
 
 ### How can i install this?
 - Move into your react-native project folder and install react-native-for-web

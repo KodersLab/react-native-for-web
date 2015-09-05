@@ -1,9 +1,10 @@
 var React = require('react');
 var Radium = require('radium');
-var browserifyStyle = require('../../utils/browserifyStyle');
+var browserifyStyle = require('../../utils/style/browserify');
 
 class Image extends React.Component{
   constructor(){
+    super();
     // default image state
     this.image = null;
     this.state = {
@@ -16,21 +17,23 @@ class Image extends React.Component{
   _loadImage(uri = null){
     // if there is a previous image, then detach the event handlers to avoid double occurence
     if(this.image){
-      this.image.removeEventListener('load', this.onLoad.bind(this));
-      this.image.removeEventListener('error', this.onError.bind(this));
+      this.image.onload = undefined;
+      this.image.onerror = undefined;
       this.image = null;
     }
     // if null is passed, it was just a reset
     if(uri === null) return;
     // create a new image source
-    this.image = new Image();
-    this.image.src = uri;
+    this.image = new window.Image();
     // attach the event listeners
-    this.image.addEventListener('load', this.onLoad.bind(this));
-    this.image.addEventListener('error', this.onError.bind(this));
+    this.image.onload = this.onLoad.bind(this);
+    this.image.onerror = this.onError.bind(this);
+    this.image.src = uri;
   }
   
   _uriChanged(props){
+    // if source is null, pass
+    if(props === null) return this._loadImage(null);
     // checks if uri changed
     var {source: {uri}} = props;
     if(uri == this.state.currentUri) return;
@@ -83,14 +86,14 @@ class Image extends React.Component{
   componentDidUpdate(){
     this._uriChanged(this.props);
   }
-  componentDidUnmount(){
+  componentWillUnmount(){
     this._uriChanged(null);
   }
   
   // actual image rendering
   render(){
     // deconstruct supported properties
-    var {source: {uri}, defaultSource, resizeMode, style, 
+    var {source: {uri}, defaultSource, resizeMode, style, children, 
       onLoad, onLoadStart, onLoadEnd, onProgress, onError, ...props} = this.props;
       
     // default classNames
@@ -109,7 +112,7 @@ class Image extends React.Component{
     // TODO: handle tintColor via canvas image manipulation if setted
 
     return <div {...props} className={classNames.join(' ')} style={browserifyStyle({backgroundImage}, style)}>
-      {props.children}
+      {children}
     </div>;
   }
 }

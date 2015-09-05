@@ -1,0 +1,18 @@
+#app .scroll-view{
+  .defaultDisplay();
+
+  // since it is a scroll-view, it should shrink.
+  flex-shrink: 1;
+
+  // handles the scroll-direction
+  &.horizontal{
+    overflow-x: auto;
+
+    & > *{
+      flex-direction: row;
+    }
+  }
+  &.vertical{
+    overflow-y: auto;
+  }
+}
