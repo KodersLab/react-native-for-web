@@ -21528,7 +21528,7 @@
 						this.touchable = new Touchable(findDOMNode(this.refs.main));
 	
 						// binds events
-						this.touchable.on('touchend', this.onMouseUp);
+						this.touchable.on('pressend', this.onMouseUp);
 					}
 				}
 			}
@@ -21550,7 +21550,7 @@
 				// if no touchable instance exists, return
 				if (!this.touchable) return;
 				// unbind touchable events
-				this.touchable.off('touchend', this.onMouseUp);
+				this.touchable.off('pressend', this.onMouseUp);
 				this.touchable.destroy();
 				this.touchable = null;
 			}
@@ -21682,10 +21682,10 @@
 			this.onMouseUp = this.onMouseUp.bind(this);
 	
 			// attach dom event listeners
-			attachListener(this.node, 'touchstart', this.onMouseDown);
-			attachListener(window, 'touchmove', this.onMouseMove);
-			attachListener(window, 'touchcancel', this.onMouseOut);
-			attachListener(window, 'touchend', this.onMouseUp);
+			attachListener(this.node, 'pointerdown', this.onMouseDown);
+			attachListener(window, 'pointermove', this.onMouseMove);
+			attachListener(window, 'pointerout', this.onMouseOut);
+			attachListener(window, 'pointerup', this.onMouseUp);
 		}
 	
 		// export the class
@@ -21700,10 +21700,10 @@
 				this.lastPointer = null;
 	
 				// detach dom event listeners
-				removeListener(this.node, 'touchstart', this.onMouseDown);
-				removeListener(window, 'touchmove', this.onMouseMove);
-				removeListener(window, 'touchcancel', this.onMouseOut);
-				removeListener(window, 'touchend', this.onMouseUp);
+				removeListener(this.node, 'pointerdown', this.onMouseDown);
+				removeListener(window, 'pointermove', this.onMouseMove);
+				removeListener(window, 'pointerout', this.onMouseOut);
+				removeListener(window, 'pointerup', this.onMouseUp);
 			}
 		}, {
 			key: 'onMouseDown',
@@ -21717,7 +21717,7 @@
 				this.scrollables = collectParentScrollables(this.node);
 				// trigger the touchstart event
 				this.state = TOUCH_STARTED;
-				this.emit('touchstart');
+				this.emit('pressstart');
 			}
 		}, {
 			key: 'onMouseMove',
@@ -21753,7 +21753,7 @@
 				if (this.cancelIfMoving()) return;
 				// trigger touch end
 				this.state = NO_EVENT;
-				this.emit('touchend');
+				this.emit('pressend');
 			}
 		}, {
 			key: 'cancelIfMoving',
@@ -21772,7 +21772,7 @@
 			value: function emitTouchCancel() {
 				// emit touch cancel
 				this.state = NO_EVENT;
-				this.emit('touchcancel');
+				this.emit('presscancel');
 				return true;
 			}
 		}]);
@@ -22051,12 +22051,21 @@
 	// disable touch atm
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var SUPPORT_TOUCH = false;
-	var MOUSE_FALLBACK = {
-		touchstart: 'mousedown',
-		touchend: 'mouseup',
-		touchcancel: 'mouseout',
-		touchmove: 'mousemove'
+	var MOUSE_POINTERS = {
+		pointerdown: 'mousedown',
+		pointerup: 'mouseup',
+		pointerout: 'mouseout',
+		pointermove: 'mousemove'
+	};
+	
+	var IE10_POINTERS = {
+		pointerdown: 'MSPointerDown',
+		pointerup: 'MSPointerUp',
+		pointerout: 'MSPointerOut',
+		pointermove: 'MSPointerMove'
 	};
 	
 	function normalizeTouchEvent(e) {
@@ -22074,8 +22083,15 @@
 	}
 	
 	function getEventName(event) {
-		if (!SUPPORT_TOUCH) event = MOUSE_FALLBACK[event] ? MOUSE_FALLBACK[event] : event;
-		return event;
+		var events = {};
+		// there is support for pointer events in IE10
+		if (window.MSPointerEvent) {
+			events = _extends({}, events, IE10_POINTERS);
+			// there is no pointer event support, falls to mouse events
+		} else if (!window.PointerEvent) {
+				events = _extends({}, events, MOUSE_POINTERS);
+			}
+		return events[event] ? events[event] : event;
 	}
 	
 	function attachListener(element, event, fn) {
@@ -22328,9 +22344,9 @@
 	        this.touchable = new Touchable(findDOMNode(this.refs.main));
 	      }
 	      // binds events
-	      this.touchable.on('touchstart', this.onMouseDown);
-	      this.touchable.on('touchend', this.onMouseUp);
-	      this.touchable.on('touchcancel', this.reset);
+	      this.touchable.on('pressstart', this.onMouseDown);
+	      this.touchable.on('pressend', this.onMouseUp);
+	      this.touchable.on('presscancel', this.reset);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22338,9 +22354,9 @@
 	      // if no touchable instance exists, return
 	      if (!this.touchable) return;
 	      // unbind touchable events
-	      this.touchable.off('touchstart', this.onMouseDown);
-	      this.touchable.off('touchend', this.onMouseUp);
-	      this.touchable.off('touchcancel', this.reset);
+	      this.touchable.off('pressstart', this.onMouseDown);
+	      this.touchable.off('pressend', this.onMouseUp);
+	      this.touchable.off('presscancel', this.reset);
 	      this.touchable.destroy();
 	    }
 	  }, {
@@ -22422,9 +22438,9 @@
 	        this.touchable = new Touchable(findDOMNode(this.refs.main));
 	      }
 	      // binds events
-	      this.touchable.on('touchstart', this.onMouseDown);
-	      this.touchable.on('touchend', this.onMouseUp);
-	      this.touchable.on('touchcancel', this.onMouseUp);
+	      this.touchable.on('pressstart', this.onMouseDown);
+	      this.touchable.on('pressend', this.onMouseUp);
+	      this.touchable.on('presscancel', this.onMouseUp);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22432,9 +22448,9 @@
 	      // if no touchable instance exists, return
 	      if (!this.touchable) return;
 	      // unbind touchable events
-	      this.touchable.off('touchstart', this.onMouseDown);
-	      this.touchable.off('touchend', this.onMouseUp);
-	      this.touchable.off('touchcancel', this.onMouseUp);
+	      this.touchable.off('pressstart', this.onMouseDown);
+	      this.touchable.off('pressend', this.onMouseUp);
+	      this.touchable.off('presscancel', this.onMouseUp);
 	      this.touchable.destroy();
 	    }
 	  }, {
