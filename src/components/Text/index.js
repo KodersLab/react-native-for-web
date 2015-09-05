@@ -1,6 +1,7 @@
 var React = require('react');
 var Radium = require('radium');
-var browserifyStyle = require('../../utils/style/browserify')
+var browserifyStyle = require('../../utils/style/browserify');
+var Tochable = require('../../utils/events/Touchable');
 
 class Text extends React.Component{
 	

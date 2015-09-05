@@ -256,10 +256,10 @@
 	React.ScrollView = __webpack_require__(183);
 	React.Image = __webpack_require__(184);
 	React.Text = __webpack_require__(185);
-	React.TextInput = __webpack_require__(186);
-	React.TouchableWithoutFeedback = __webpack_require__(187);
+	React.TextInput = __webpack_require__(189);
+	React.TouchableWithoutFeedback = __webpack_require__(190);
 	React.TouchableOpacity = __webpack_require__(191);
-	React.TouchableHighlight = __webpack_require__(187);
+	React.TouchableHighlight = __webpack_require__(190);
 	
 	// TODO: consider using the spread operator to inject new classes?
 	module.exports = React;
@@ -21493,6 +21493,7 @@
 	var React = __webpack_require__(4);
 	var Radium = __webpack_require__(163);
 	var browserifyStyle = __webpack_require__(178);
+	var Tochable = __webpack_require__(186);
 	
 	var Text = (function (_React$Component) {
 		_inherits(Text, _React$Component);
@@ -21572,286 +21573,13 @@
 	
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var React = __webpack_require__(4);
-	var Radium = __webpack_require__(163);
-	var browserifyStyle = __webpack_require__(178);
+	var EventEmitter = __webpack_require__(187);
 	
-	var TextInput = (function (_React$Component) {
-	  _inherits(TextInput, _React$Component);
-	
-	  function TextInput() {
-	    _classCallCheck(this, TextInput);
-	
-	    _get(Object.getPrototypeOf(TextInput.prototype), 'constructor', this).apply(this, arguments);
-	  }
-	
-	  _createClass(TextInput, [{
-	    key: 'onChange',
-	
-	    // onChange and onChangeText support
-	    value: function onChange(e) {
-	      if (this.props.onChangeText) this.props.onChangeText(e.target.value);
-	      if (this.props.onChange) this.props.onChange({ nativeEvent: { text: e.target.value } });
-	    }
-	
-	    // onFocus support
-	  }, {
-	    key: 'onFocus',
-	    value: function onFocus(e) {
-	      if (this.props.onFocus) this.props.onFocus(e);
-	    }
-	
-	    // onBlur support
-	  }, {
-	    key: 'onBlur',
-	    value: function onBlur(e) {
-	      if (this.props.onBlur) this.props.onBlur(e);
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // if wanted, do autofocus
-	      if (this.props.autoFocus) this.refs.main.focus();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this = this;
-	
-	      // by default, use a input[text]
-	      var tagName = 'input';
-	      var type = 'text';
-	
-	      // copy over the same props to the new props for the input
-	      var _props = this.props;
-	      var defaultValue = _props.defaultValue;
-	      var value = _props.value;
-	      var placeholder = _props.placeholder;
-	      var multiline = _props.multiline;
-	      var secureTextEntry = _props.secureTextEntry;
-	      var autoFocus = _props.autoFocus;
-	      var textAlign = _props.textAlign;
-	      var style = _props.style;
-	      var children = _props.children;
-	      var onChange = _props.onChange;
-	      var onBlur = _props.onBlur;
-	      var onFocus = _props.onFocus;
-	      var onChangeText = _props.onChangeText;
-	
-	      var props = _objectWithoutProperties(_props, ['defaultValue', 'value', 'placeholder', 'multiline', 'secureTextEntry', 'autoFocus', 'textAlign', 'style', 'children', 'onChange', 'onBlur', 'onFocus', 'onChangeText']);
-	
-	      // init the classNames
-	      var classNames = ['text-input'];
-	
-	      // handle the textAlign
-	      if (textAlign) classNames.push('text-align-' + textAlign);
-	
-	      // If multiline, convert to a textarea
-	      if (multiline) tagName = 'textarea';
-	
-	      // if needs password-like, convert to password field.
-	      // TODO: multiline password-like inputs?
-	      if (secureTextEntry && !multiline) {
-	        type = 'password';
-	        tagName = 'input';
-	      }
-	
-	      // return the input
-	      return React.createElement(tagName, {
-	        ref: 'main',
-	        className: classNames.join(' '),
-	
-	        value: value,
-	        defaultValue: defaultValue,
-	        placeholder: placeholder,
-	        style: browserifyStyle(style),
-	
-	        onChange: function onChange(e) {
-	          return _this.onChange(e);
-	        },
-	        onFocus: function onFocus(e) {
-	          return _this.onFocus(e);
-	        },
-	        onBlur: function onBlur(e) {
-	          return _this.onBlur(e);
-	        }
-	      }, null);
-	    }
-	  }]);
-	
-	  return TextInput;
-	})(React.Component);
-	
-	module.exports = Radium(TextInput);
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var React = __webpack_require__(4);
-	
-	var _require = __webpack_require__(160);
-	
-	var findDOMNode = _require.findDOMNode;
-	
-	var Radium = __webpack_require__(163);
-	var browserifyStyle = __webpack_require__(178);
-	var Touchable = __webpack_require__(188);
-	
-	var TouchableWithoutFeedback = (function (_React$Component) {
-	  _inherits(TouchableWithoutFeedback, _React$Component);
-	
-	  function TouchableWithoutFeedback() {
-	    _classCallCheck(this, TouchableWithoutFeedback);
-	
-	    _get(Object.getPrototypeOf(TouchableWithoutFeedback.prototype), 'constructor', this).apply(this, arguments);
-	  }
-	
-	  _createClass(TouchableWithoutFeedback, [{
-	    key: 'onMouseDown',
-	    value: function onMouseDown(e) {
-	      var _this = this;
-	
-	      // handle onPressIn
-	      var _props = this.props;
-	      var _props$delayPressIn = _props.delayPressIn;
-	      var delayPressIn = _props$delayPressIn === undefined ? 0 : _props$delayPressIn;
-	      var _props$onPressIn = _props.onPressIn;
-	      var onPressIn = _props$onPressIn === undefined ? false : _props$onPressIn;
-	      var _props$delayLongPress = _props.delayLongPress;
-	      var delayLongPress = _props$delayLongPress === undefined ? 500 : _props$delayLongPress;
-	      var _props$onLongPress = _props.onLongPress;
-	      var onLongPress = _props$onLongPress === undefined ? false : _props$onLongPress;
-	
-	      // there is no press in event, so do nothing
-	      if (!onPressIn) return;
-	      // call the event after a delay
-	      this.delayPressIn = setTimeout(function () {
-	        onPressIn(e);
-	        // setup the delay for a long press
-	        _this.delayLongPress = setTimeout(function () {
-	          return onLongPress(e);
-	        }, delayLongPress);
-	      }, delayPressIn);
-	    }
-	  }, {
-	    key: 'onMouseUp',
-	    value: function onMouseUp(e) {
-	      // handle onPressOut
-	      var _props2 = this.props;
-	      var _props2$delayPressOut = _props2.delayPressOut;
-	      var delayPressOut = _props2$delayPressOut === undefined ? 0 : _props2$delayPressOut;
-	      var _props2$onPressOut = _props2.onPressOut;
-	      var onPressOut = _props2$onPressOut === undefined ? false : _props2$onPressOut;
-	      var onPress = _props2.onPress;
-	
-	      // call the event after a delay
-	      setTimeout(function () {
-	        // handle onPressOut first
-	        if (onPressOut) onPressOut(e);
-	        // handle the onPress event passed as a prop
-	        if (onPress) onPress(e);
-	      }, delayPressOut);
-	      this.reset();
-	    }
-	  }, {
-	    key: 'reset',
-	    value: function reset() {
-	      // if there was a delay for press in, clear it
-	      if (this.delayPressIn) {
-	        clearTimeout(this.delayPressIn);
-	        this.delayPressIn = null;
-	      }
-	      // if there was a delay for a long press, clear it
-	      if (this.delayLongPress) {
-	        clearTimeout(this.delayLongPress);
-	        this.delayLongPress = null;
-	      }
-	    }
-	
-	    // bind event handlers
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // create touchable instance
-	      if (!this.touchable) {
-	        this.touchable = new Touchable(findDOMNode(this.refs.main));
-	      }
-	      // binds events
-	      this.touchable.on('touchstart', this.onMouseDown.bind(this));
-	      this.touchable.on('touchend', this.onMouseUp.bind(this));
-	      this.touchable.on('touchcancel', this.reset.bind(this));
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      // if no touchable instance exists, return
-	      if (!this.touchable) return;
-	      // unbind touchable events
-	      this.touchable.off('touchstart', this.onMouseDown.bind(this));
-	      this.touchable.off('touchend', this.onMouseUp.bind(this));
-	      this.touchable.off('touchcancel', this.reset.bind(this));
-	      this.touchable.destroy();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      // deconstruct from the props
-	      var children = this.props.children;
-	
-	      // returns the component
-	      return React.cloneElement(children, {
-	        ref: 'main',
-	        style: [styles.main].concat(Array.isArray(children.props.style) ? children.props.style : [children.props.style])
-	      });
-	    }
-	  }]);
-	
-	  return TouchableWithoutFeedback;
-	})(React.Component);
-	
-	var styles = {
-	  main: {
-	    cursor: 'pointer',
-	    userSelect: 'none'
-	  }
-	};
-	
-	module.exports = Radium(TouchableWithoutFeedback);
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var EventEmitter = __webpack_require__(189);
-	
-	var _require = __webpack_require__(190);
+	var _require = __webpack_require__(188);
 	
 	var attachListener = _require.attachListener;
 	var removeListener = _require.removeListener;
@@ -22022,7 +21750,7 @@
 	module.exports = Touchable;
 
 /***/ },
-/* 189 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22281,7 +22009,7 @@
 	}
 
 /***/ },
-/* 190 */
+/* 188 */
 /***/ function(module, exports) {
 
 	// TODO: provide support for touch-enabled browsers instead of fallback to mouse events
@@ -22332,6 +22060,279 @@
 	};
 
 /***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(4);
+	var Radium = __webpack_require__(163);
+	var browserifyStyle = __webpack_require__(178);
+	
+	var TextInput = (function (_React$Component) {
+	  _inherits(TextInput, _React$Component);
+	
+	  function TextInput() {
+	    _classCallCheck(this, TextInput);
+	
+	    _get(Object.getPrototypeOf(TextInput.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(TextInput, [{
+	    key: 'onChange',
+	
+	    // onChange and onChangeText support
+	    value: function onChange(e) {
+	      if (this.props.onChangeText) this.props.onChangeText(e.target.value);
+	      if (this.props.onChange) this.props.onChange({ nativeEvent: { text: e.target.value } });
+	    }
+	
+	    // onFocus support
+	  }, {
+	    key: 'onFocus',
+	    value: function onFocus(e) {
+	      if (this.props.onFocus) this.props.onFocus(e);
+	    }
+	
+	    // onBlur support
+	  }, {
+	    key: 'onBlur',
+	    value: function onBlur(e) {
+	      if (this.props.onBlur) this.props.onBlur(e);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      // if wanted, do autofocus
+	      if (this.props.autoFocus) this.refs.main.focus();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+	
+	      // by default, use a input[text]
+	      var tagName = 'input';
+	      var type = 'text';
+	
+	      // copy over the same props to the new props for the input
+	      var _props = this.props;
+	      var defaultValue = _props.defaultValue;
+	      var value = _props.value;
+	      var placeholder = _props.placeholder;
+	      var multiline = _props.multiline;
+	      var secureTextEntry = _props.secureTextEntry;
+	      var autoFocus = _props.autoFocus;
+	      var textAlign = _props.textAlign;
+	      var style = _props.style;
+	      var children = _props.children;
+	      var onChange = _props.onChange;
+	      var onBlur = _props.onBlur;
+	      var onFocus = _props.onFocus;
+	      var onChangeText = _props.onChangeText;
+	
+	      var props = _objectWithoutProperties(_props, ['defaultValue', 'value', 'placeholder', 'multiline', 'secureTextEntry', 'autoFocus', 'textAlign', 'style', 'children', 'onChange', 'onBlur', 'onFocus', 'onChangeText']);
+	
+	      // init the classNames
+	      var classNames = ['text-input'];
+	
+	      // handle the textAlign
+	      if (textAlign) classNames.push('text-align-' + textAlign);
+	
+	      // If multiline, convert to a textarea
+	      if (multiline) tagName = 'textarea';
+	
+	      // if needs password-like, convert to password field.
+	      // TODO: multiline password-like inputs?
+	      if (secureTextEntry && !multiline) {
+	        type = 'password';
+	        tagName = 'input';
+	      }
+	
+	      // return the input
+	      return React.createElement(tagName, {
+	        ref: 'main',
+	        className: classNames.join(' '),
+	
+	        value: value,
+	        defaultValue: defaultValue,
+	        placeholder: placeholder,
+	        style: browserifyStyle(style),
+	
+	        onChange: function onChange(e) {
+	          return _this.onChange(e);
+	        },
+	        onFocus: function onFocus(e) {
+	          return _this.onFocus(e);
+	        },
+	        onBlur: function onBlur(e) {
+	          return _this.onBlur(e);
+	        }
+	      }, null);
+	    }
+	  }]);
+	
+	  return TextInput;
+	})(React.Component);
+	
+	module.exports = Radium(TextInput);
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(4);
+	
+	var _require = __webpack_require__(160);
+	
+	var findDOMNode = _require.findDOMNode;
+	
+	var Radium = __webpack_require__(163);
+	var browserifyStyle = __webpack_require__(178);
+	var Touchable = __webpack_require__(186);
+	
+	var TouchableWithoutFeedback = (function (_React$Component) {
+	  _inherits(TouchableWithoutFeedback, _React$Component);
+	
+	  function TouchableWithoutFeedback() {
+	    _classCallCheck(this, TouchableWithoutFeedback);
+	
+	    _get(Object.getPrototypeOf(TouchableWithoutFeedback.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(TouchableWithoutFeedback, [{
+	    key: 'onMouseDown',
+	    value: function onMouseDown(e) {
+	      var _this = this;
+	
+	      // handle onPressIn
+	      var _props = this.props;
+	      var _props$delayPressIn = _props.delayPressIn;
+	      var delayPressIn = _props$delayPressIn === undefined ? 0 : _props$delayPressIn;
+	      var _props$onPressIn = _props.onPressIn;
+	      var onPressIn = _props$onPressIn === undefined ? false : _props$onPressIn;
+	      var _props$delayLongPress = _props.delayLongPress;
+	      var delayLongPress = _props$delayLongPress === undefined ? 500 : _props$delayLongPress;
+	      var _props$onLongPress = _props.onLongPress;
+	      var onLongPress = _props$onLongPress === undefined ? false : _props$onLongPress;
+	
+	      // there is no press in event, so do nothing
+	      if (!onPressIn) return;
+	      // call the event after a delay
+	      this.delayPressIn = setTimeout(function () {
+	        onPressIn(e);
+	        // setup the delay for a long press
+	        _this.delayLongPress = setTimeout(function () {
+	          return onLongPress(e);
+	        }, delayLongPress);
+	      }, delayPressIn);
+	    }
+	  }, {
+	    key: 'onMouseUp',
+	    value: function onMouseUp(e) {
+	      // handle onPressOut
+	      var _props2 = this.props;
+	      var _props2$delayPressOut = _props2.delayPressOut;
+	      var delayPressOut = _props2$delayPressOut === undefined ? 0 : _props2$delayPressOut;
+	      var _props2$onPressOut = _props2.onPressOut;
+	      var onPressOut = _props2$onPressOut === undefined ? false : _props2$onPressOut;
+	      var onPress = _props2.onPress;
+	
+	      // call the event after a delay
+	      setTimeout(function () {
+	        // handle onPressOut first
+	        if (onPressOut) onPressOut(e);
+	        // handle the onPress event passed as a prop
+	        if (onPress) onPress(e);
+	      }, delayPressOut);
+	      this.reset();
+	    }
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      // if there was a delay for press in, clear it
+	      if (this.delayPressIn) {
+	        clearTimeout(this.delayPressIn);
+	        this.delayPressIn = null;
+	      }
+	      // if there was a delay for a long press, clear it
+	      if (this.delayLongPress) {
+	        clearTimeout(this.delayLongPress);
+	        this.delayLongPress = null;
+	      }
+	    }
+	
+	    // bind event handlers
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      // create touchable instance
+	      if (!this.touchable) {
+	        this.touchable = new Touchable(findDOMNode(this.refs.main));
+	      }
+	      // binds events
+	      this.touchable.on('touchstart', this.onMouseDown.bind(this));
+	      this.touchable.on('touchend', this.onMouseUp.bind(this));
+	      this.touchable.on('touchcancel', this.reset.bind(this));
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      // if no touchable instance exists, return
+	      if (!this.touchable) return;
+	      // unbind touchable events
+	      this.touchable.off('touchstart', this.onMouseDown.bind(this));
+	      this.touchable.off('touchend', this.onMouseUp.bind(this));
+	      this.touchable.off('touchcancel', this.reset.bind(this));
+	      this.touchable.destroy();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      // deconstruct from the props
+	      var children = this.props.children;
+	
+	      // returns the component
+	      return React.cloneElement(children, {
+	        ref: 'main',
+	        style: [styles.main].concat(Array.isArray(children.props.style) ? children.props.style : [children.props.style])
+	      });
+	    }
+	  }]);
+	
+	  return TouchableWithoutFeedback;
+	})(React.Component);
+	
+	var styles = {
+	  main: {
+	    cursor: 'pointer',
+	    userSelect: 'none'
+	  }
+	};
+	
+	module.exports = Radium(TouchableWithoutFeedback);
+
+/***/ },
 /* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22350,9 +22351,9 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(4);
-	var TouchableWithoutFeedback = __webpack_require__(187);
+	var TouchableWithoutFeedback = __webpack_require__(190);
 	var View = __webpack_require__(162);
-	var Touchable = __webpack_require__(188);
+	var Touchable = __webpack_require__(186);
 	
 	var _require = __webpack_require__(160);
 	
