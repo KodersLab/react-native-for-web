@@ -12,6 +12,10 @@ class Image extends React.Component{
       loaded: false,
       currentUri: null
     };
+    
+    // autobinding
+    this.onLoad = this.onLoad.bind(this);
+    this.onError = this.onError.bind(this);
   }
   
   _loadImage(uri = null){
@@ -26,8 +30,8 @@ class Image extends React.Component{
     // create a new image source
     this.image = new window.Image();
     // attach the event listeners
-    this.image.onload = this.onLoad.bind(this);
-    this.image.onerror = this.onError.bind(this);
+    this.image.onload = this.onLoad;
+    this.image.onerror = this.onError;
     this.image.src = uri;
   }
   

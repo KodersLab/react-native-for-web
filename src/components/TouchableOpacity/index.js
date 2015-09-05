@@ -10,6 +10,10 @@ class TouchableOpacity extends React.Component{
     this.state = {
       opacity: 1
     };
+    
+    // autobinding
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
   }
 
   // bind event handlers
@@ -19,18 +23,18 @@ class TouchableOpacity extends React.Component{
       this.touchable = new Touchable(findDOMNode(this.refs.main));
     }
     // binds events
-    this.touchable.on('touchstart', this.onMouseDown.bind(this));
-    this.touchable.on('touchend', this.onMouseUp.bind(this));
-    this.touchable.on('touchcancel', this.onMouseUp.bind(this));
+    this.touchable.on('touchstart', this.onMouseDown);
+    this.touchable.on('touchend', this.onMouseUp);
+    this.touchable.on('touchcancel', this.onMouseUp);
   }
 
   componentWillUnmount(){
     // if no touchable instance exists, return
     if(!this.touchable) return;
     // unbind touchable events
-    this.touchable.off('touchstart', this.onMouseDown.bind(this));
-    this.touchable.off('touchend', this.onMouseUp.bind(this));
-    this.touchable.off('touchcancel', this.onMouseUp.bind(this));
+    this.touchable.off('touchstart', this.onMouseDown);
+    this.touchable.off('touchend', this.onMouseUp);
+    this.touchable.off('touchcancel', this.onMouseUp);
     this.touchable.destroy();
   }
 

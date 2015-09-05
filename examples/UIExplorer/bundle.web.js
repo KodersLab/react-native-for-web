@@ -21316,6 +21316,10 @@
 	      loaded: false,
 	      currentUri: null
 	    };
+	
+	    // autobinding
+	    this.onLoad = this.onLoad.bind(this);
+	    this.onError = this.onError.bind(this);
 	  }
 	
 	  _createClass(Image, [{
@@ -21334,8 +21338,8 @@
 	      // create a new image source
 	      this.image = new window.Image();
 	      // attach the event listeners
-	      this.image.onload = this.onLoad.bind(this);
-	      this.image.onerror = this.onError.bind(this);
+	      this.image.onload = this.onLoad;
+	      this.image.onerror = this.onError;
 	      this.image.src = uri;
 	    }
 	  }, {
@@ -21491,9 +21495,14 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(4);
+	
+	var _require = __webpack_require__(160);
+	
+	var findDOMNode = _require.findDOMNode;
+	
 	var Radium = __webpack_require__(163);
 	var browserifyStyle = __webpack_require__(178);
-	var Tochable = __webpack_require__(186);
+	var Touchable = __webpack_require__(186);
 	
 	var Text = (function (_React$Component) {
 		_inherits(Text, _React$Component);
@@ -21501,22 +21510,39 @@
 		function Text() {
 			_classCallCheck(this, Text);
 	
-			_get(Object.getPrototypeOf(Text.prototype), 'constructor', this).apply(this, arguments);
+			_get(Object.getPrototypeOf(Text.prototype), 'constructor', this).call(this);
+	
+			// autobind
+			this.onMouseUp = this.onMouseUp.bind(this);
 		}
 	
 		// export the component wrapped in radium
 	
 		_createClass(Text, [{
-			key: 'componentDidMount',
+			key: '_createPressListener',
+			value: function _createPressListener(props) {
+				// create press listener only if really needed
+				if (props.onPress) {
+					// create touchable instance if it does not exists atm
+					if (!this.touchable) {
+						this.touchable = new Touchable(findDOMNode(this.refs.main));
+	
+						// binds events
+						this.touchable.on('touchend', this.onMouseUp);
+					}
+				}
+			}
 	
 			// bind event handlers
+		}, {
+			key: 'componentDidMount',
 			value: function componentDidMount() {
-				// create touchable instance
-				if (!this.touchable) {
-					this.touchable = new Touchable(findDOMNode(this.refs.main));
-				}
-				// binds events
-				this.touchable.on('touchend', this.onMouseUp.bind(this));
+				this._createPressListener(this.props);
+			}
+		}, {
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps(props) {
+				this._createPressListener(props);
 			}
 		}, {
 			key: 'componentWillUnmount',
@@ -21524,8 +21550,9 @@
 				// if no touchable instance exists, return
 				if (!this.touchable) return;
 				// unbind touchable events
-				this.touchable.off('touchend', this.onMouseUp.bind(this));
+				this.touchable.off('touchend', this.onMouseUp);
 				this.touchable.destroy();
+				this.touchable = null;
 			}
 		}, {
 			key: 'onMouseUp',
@@ -21648,11 +21675,17 @@
 			this.lastPointer = null;
 			this.scrollables = null;
 	
+			// autobind methods
+			this.onMouseDown = this.onMouseDown.bind(this);
+			this.onMouseMove = this.onMouseMove.bind(this);
+			this.onMouseOut = this.onMouseOut.bind(this);
+			this.onMouseUp = this.onMouseUp.bind(this);
+	
 			// attach dom event listeners
-			attachListener(this.node, 'touchstart', this.onMouseDown.bind(this));
-			attachListener(window, 'touchmove', this.onMouseMove.bind(this));
-			attachListener(window, 'touchcancel', this.onMouseOut.bind(this));
-			attachListener(window, 'touchend', this.onMouseUp.bind(this));
+			attachListener(this.node, 'touchstart', this.onMouseDown);
+			attachListener(window, 'touchmove', this.onMouseMove);
+			attachListener(window, 'touchcancel', this.onMouseOut);
+			attachListener(window, 'touchend', this.onMouseUp);
 		}
 	
 		// export the class
@@ -21667,10 +21700,10 @@
 				this.lastPointer = null;
 	
 				// detach dom event listeners
-				removeListener(window, 'touchstart', this.onMouseDown.bind(this));
-				removeListener(window, 'touchmove', this.onMouseMove.bind(this));
-				removeListener(window, 'touchcancel', this.onMouseOut.bind(this));
-				removeListener(window, 'touchend', this.onMouseUp.bind(this));
+				removeListener(this.node, 'touchstart', this.onMouseDown);
+				removeListener(window, 'touchmove', this.onMouseMove);
+				removeListener(window, 'touchcancel', this.onMouseOut);
+				removeListener(window, 'touchend', this.onMouseUp);
 			}
 		}, {
 			key: 'onMouseDown',
@@ -22217,7 +22250,11 @@
 	  function TouchableWithoutFeedback() {
 	    _classCallCheck(this, TouchableWithoutFeedback);
 	
-	    _get(Object.getPrototypeOf(TouchableWithoutFeedback.prototype), 'constructor', this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(TouchableWithoutFeedback.prototype), 'constructor', this).call(this);
+	    // autobinding
+	    this.onMouseDown = this.onMouseDown.bind(this);
+	    this.onMouseUp = this.onMouseUp.bind(this);
+	    this.reset = this.reset.bind(this);
 	  }
 	
 	  _createClass(TouchableWithoutFeedback, [{
@@ -22291,9 +22328,9 @@
 	        this.touchable = new Touchable(findDOMNode(this.refs.main));
 	      }
 	      // binds events
-	      this.touchable.on('touchstart', this.onMouseDown.bind(this));
-	      this.touchable.on('touchend', this.onMouseUp.bind(this));
-	      this.touchable.on('touchcancel', this.reset.bind(this));
+	      this.touchable.on('touchstart', this.onMouseDown);
+	      this.touchable.on('touchend', this.onMouseUp);
+	      this.touchable.on('touchcancel', this.reset);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22301,9 +22338,9 @@
 	      // if no touchable instance exists, return
 	      if (!this.touchable) return;
 	      // unbind touchable events
-	      this.touchable.off('touchstart', this.onMouseDown.bind(this));
-	      this.touchable.off('touchend', this.onMouseUp.bind(this));
-	      this.touchable.off('touchcancel', this.reset.bind(this));
+	      this.touchable.off('touchstart', this.onMouseDown);
+	      this.touchable.off('touchend', this.onMouseUp);
+	      this.touchable.off('touchcancel', this.reset);
 	      this.touchable.destroy();
 	    }
 	  }, {
@@ -22369,6 +22406,10 @@
 	    this.state = {
 	      opacity: 1
 	    };
+	
+	    // autobinding
+	    this.onMouseDown = this.onMouseDown.bind(this);
+	    this.onMouseUp = this.onMouseUp.bind(this);
 	  }
 	
 	  // bind event handlers
@@ -22381,9 +22422,9 @@
 	        this.touchable = new Touchable(findDOMNode(this.refs.main));
 	      }
 	      // binds events
-	      this.touchable.on('touchstart', this.onMouseDown.bind(this));
-	      this.touchable.on('touchend', this.onMouseUp.bind(this));
-	      this.touchable.on('touchcancel', this.onMouseUp.bind(this));
+	      this.touchable.on('touchstart', this.onMouseDown);
+	      this.touchable.on('touchend', this.onMouseUp);
+	      this.touchable.on('touchcancel', this.onMouseUp);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22391,9 +22432,9 @@
 	      // if no touchable instance exists, return
 	      if (!this.touchable) return;
 	      // unbind touchable events
-	      this.touchable.off('touchstart', this.onMouseDown.bind(this));
-	      this.touchable.off('touchend', this.onMouseUp.bind(this));
-	      this.touchable.off('touchcancel', this.onMouseUp.bind(this));
+	      this.touchable.off('touchstart', this.onMouseDown);
+	      this.touchable.off('touchend', this.onMouseUp);
+	      this.touchable.off('touchcancel', this.onMouseUp);
 	      this.touchable.destroy();
 	    }
 	  }, {

@@ -5,6 +5,14 @@ var browserifyStyle = require('../../utils/style/browserify');
 var Touchable = require('../../utils/events/Touchable');
 
 class TouchableWithoutFeedback extends React.Component{
+  constructor(){
+    super();
+    // autobinding
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+  
   onMouseDown(e){
     // handle onPressIn
     var {delayPressIn = 0, onPressIn = false, delayLongPress = 500, onLongPress = false} = this.props;
@@ -52,18 +60,18 @@ class TouchableWithoutFeedback extends React.Component{
       this.touchable = new Touchable(findDOMNode(this.refs.main));
     }
     // binds events
-    this.touchable.on('touchstart', this.onMouseDown.bind(this));
-    this.touchable.on('touchend', this.onMouseUp.bind(this));
-    this.touchable.on('touchcancel', this.reset.bind(this));
+    this.touchable.on('touchstart', this.onMouseDown);
+    this.touchable.on('touchend', this.onMouseUp);
+    this.touchable.on('touchcancel', this.reset);
   }
 
   componentWillUnmount(){
     // if no touchable instance exists, return
     if(!this.touchable) return;
     // unbind touchable events
-    this.touchable.off('touchstart', this.onMouseDown.bind(this));
-    this.touchable.off('touchend', this.onMouseUp.bind(this));
-    this.touchable.off('touchcancel', this.reset.bind(this));
+    this.touchable.off('touchstart', this.onMouseDown);
+    this.touchable.off('touchend', this.onMouseUp);
+    this.touchable.off('touchcancel', this.reset);
     this.touchable.destroy();
   }
 

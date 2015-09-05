@@ -61,11 +61,17 @@ class Touchable extends EventEmitter{
 		this.lastPointer = null;
 		this.scrollables = null;
 		
+		// autobind methods
+		this.onMouseDown = this.onMouseDown.bind(this);
+		this.onMouseMove = this.onMouseMove.bind(this);
+		this.onMouseOut = this.onMouseOut.bind(this);
+		this.onMouseUp = this.onMouseUp.bind(this);
+		
 		// attach dom event listeners
-		attachListener(this.node, 'touchstart', this.onMouseDown.bind(this));
-		attachListener(window, 'touchmove', this.onMouseMove.bind(this));
-		attachListener(window, 'touchcancel', this.onMouseOut.bind(this));
-		attachListener(window, 'touchend', this.onMouseUp.bind(this));
+		attachListener(this.node, 'touchstart', this.onMouseDown);
+		attachListener(window, 'touchmove', this.onMouseMove);
+		attachListener(window, 'touchcancel', this.onMouseOut);
+		attachListener(window, 'touchend', this.onMouseUp);
 	}
 	
 	destroy(){
@@ -76,10 +82,10 @@ class Touchable extends EventEmitter{
 		this.lastPointer = null;
 		
 		// detach dom event listeners
-		removeListener(window, 'touchstart', this.onMouseDown.bind(this));
-		removeListener(window, 'touchmove', this.onMouseMove.bind(this));
-		removeListener(window, 'touchcancel', this.onMouseOut.bind(this));
-		removeListener(window, 'touchend', this.onMouseUp.bind(this));
+		removeListener(this.node, 'touchstart', this.onMouseDown);
+		removeListener(window, 'touchmove', this.onMouseMove);
+		removeListener(window, 'touchcancel', this.onMouseOut);
+		removeListener(window, 'touchend', this.onMouseUp);
 	}
 	
 	onMouseDown(e){
