@@ -1,4 +1,5 @@
 var EventEmitter = require('eventemitter3');
+var {attachListener, removeListener, normalizeTouchEvent} = require('./eventListener');
 
 // Minimal timeout used to delay a bit the events and make events emulation work
 var EPS = 100;
@@ -61,10 +62,10 @@ class Touchable extends EventEmitter{
 		this.scrollables = null;
 		
 		// attach dom event listeners
-		this.node.addEventListener('mousedown', this.onMouseDown.bind(this));
-		this.node.addEventListener('mousemove', this.onMouseMove.bind(this));
-		this.node.addEventListener('mouseout', this.onMouseOut.bind(this));
-		this.node.addEventListener('mouseup', this.onMouseUp.bind(this));
+		attachListener(this.node, 'touchstart', this.onMouseDown.bind(this));
+		attachListener(window, 'touchmove', this.onMouseMove.bind(this));
+		attachListener(window, 'touchcancel', this.onMouseOut.bind(this));
+		attachListener(window, 'touchend', this.onMouseUp.bind(this));
 	}
 	
 	destroy(){
@@ -75,16 +76,16 @@ class Touchable extends EventEmitter{
 		this.lastPointer = null;
 		
 		// detach dom event listeners
-		this.node.removeEventListener('mousedown', this.onMouseDown.bind(this));
-		this.node.removeEventListener('mousemove', this.onMouseMove.bind(this));
-		this.node.removeEventListener('mouseout', this.onMouseOut.bind(this));
-		this.node.removeEventListener('mouseup', this.onMouseUp.bind(this));
+		removeListener(window, 'touchstart', this.onMouseDown.bind(this));
+		removeListener(window, 'touchmove', this.onMouseMove.bind(this));
+		removeListener(window, 'touchcancel', this.onMouseOut.bind(this));
+		removeListener(window, 'touchend', this.onMouseUp.bind(this));
 	}
 	
 	onMouseDown(e){
+		e = normalizeTouchEvent(e);
 		// to mouse down, you should first be in no_event
 		if(this.state !== NO_EVENT) return;
-		
 		// store pointer position
 		this.pointer = {x: e.clientX, y: e.clientY};
 		this.lastPointer = {x: e.clientX, y: e.clientY};
@@ -95,6 +96,7 @@ class Touchable extends EventEmitter{
 	}
 	
 	onMouseMove(e){
+		e = normalizeTouchEvent(e);
 		// touch has to be started first
 		if(this.state !== TOUCH_STARTED) return;
 		// update last pointer position
@@ -104,6 +106,7 @@ class Touchable extends EventEmitter{
 	}
 	
 	onMouseOut(e){
+		e = normalizeTouchEvent(e);
 		// touch has to be started first
 		if(this.state !== TOUCH_STARTED) return;
 		// update last pointer position
@@ -113,6 +116,7 @@ class Touchable extends EventEmitter{
 	}
 	
 	onMouseUp(e){
+		e = normalizeTouchEvent(e);
 		// touch has to be started first
 		if(this.state !== TOUCH_STARTED) return;
 		// update last pointer position

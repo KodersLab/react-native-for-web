@@ -69,7 +69,7 @@
 	var StyleSheet = React.StyleSheet;
 	var AppRegistry = React.AppRegistry;
 	
-	var EXAMPLES = [__webpack_require__(191), __webpack_require__(192), __webpack_require__(193), __webpack_require__(194), __webpack_require__(201), __webpack_require__(202), __webpack_require__(203)];
+	var EXAMPLES = [__webpack_require__(192), __webpack_require__(193), __webpack_require__(194), __webpack_require__(195), __webpack_require__(202), __webpack_require__(203), __webpack_require__(204)];
 	
 	var App = (function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -258,7 +258,7 @@
 	React.Text = __webpack_require__(185);
 	React.TextInput = __webpack_require__(186);
 	React.TouchableWithoutFeedback = __webpack_require__(187);
-	React.TouchableOpacity = __webpack_require__(190);
+	React.TouchableOpacity = __webpack_require__(191);
 	React.TouchableHighlight = __webpack_require__(187);
 	
 	// TODO: consider using the spread operator to inject new classes?
@@ -21506,6 +21506,32 @@
 		// export the component wrapped in radium
 	
 		_createClass(Text, [{
+			key: 'componentDidMount',
+	
+			// bind event handlers
+			value: function componentDidMount() {
+				// create touchable instance
+				if (!this.touchable) {
+					this.touchable = new Touchable(findDOMNode(this.refs.main));
+				}
+				// binds events
+				this.touchable.on('touchend', this.onMouseUp.bind(this));
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				// if no touchable instance exists, return
+				if (!this.touchable) return;
+				// unbind touchable events
+				this.touchable.off('touchend', this.onMouseUp.bind(this));
+				this.touchable.destroy();
+			}
+		}, {
+			key: 'onMouseUp',
+			value: function onMouseUp(e) {
+				if (this.props.onPress) this.props.onPress();
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				// deconstruct props and extract the needed ones.
@@ -21525,7 +21551,7 @@
 				// return the component
 				return React.createElement(
 					'span',
-					_extends({}, props, { className: classNames.join(' '), style: browserifyStyle(style) }),
+					_extends({}, props, { ref: 'main', className: classNames.join(' '), style: browserifyStyle(style) }),
 					children
 				);
 			}
@@ -21825,6 +21851,12 @@
 	
 	var EventEmitter = __webpack_require__(189);
 	
+	var _require = __webpack_require__(190);
+	
+	var attachListener = _require.attachListener;
+	var removeListener = _require.removeListener;
+	var normalizeTouchEvent = _require.normalizeTouchEvent;
+	
 	// Minimal timeout used to delay a bit the events and make events emulation work
 	var EPS = 100;
 	
@@ -21889,10 +21921,10 @@
 			this.scrollables = null;
 	
 			// attach dom event listeners
-			this.node.addEventListener('mousedown', this.onMouseDown.bind(this));
-			this.node.addEventListener('mousemove', this.onMouseMove.bind(this));
-			this.node.addEventListener('mouseout', this.onMouseOut.bind(this));
-			this.node.addEventListener('mouseup', this.onMouseUp.bind(this));
+			attachListener(this.node, 'touchstart', this.onMouseDown.bind(this));
+			attachListener(window, 'touchmove', this.onMouseMove.bind(this));
+			attachListener(window, 'touchcancel', this.onMouseOut.bind(this));
+			attachListener(window, 'touchend', this.onMouseUp.bind(this));
 		}
 	
 		// export the class
@@ -21907,17 +21939,17 @@
 				this.lastPointer = null;
 	
 				// detach dom event listeners
-				this.node.removeEventListener('mousedown', this.onMouseDown.bind(this));
-				this.node.removeEventListener('mousemove', this.onMouseMove.bind(this));
-				this.node.removeEventListener('mouseout', this.onMouseOut.bind(this));
-				this.node.removeEventListener('mouseup', this.onMouseUp.bind(this));
+				removeListener(window, 'touchstart', this.onMouseDown.bind(this));
+				removeListener(window, 'touchmove', this.onMouseMove.bind(this));
+				removeListener(window, 'touchcancel', this.onMouseOut.bind(this));
+				removeListener(window, 'touchend', this.onMouseUp.bind(this));
 			}
 		}, {
 			key: 'onMouseDown',
 			value: function onMouseDown(e) {
+				e = normalizeTouchEvent(e);
 				// to mouse down, you should first be in no_event
 				if (this.state !== NO_EVENT) return;
-	
 				// store pointer position
 				this.pointer = { x: e.clientX, y: e.clientY };
 				this.lastPointer = { x: e.clientX, y: e.clientY };
@@ -21929,6 +21961,7 @@
 		}, {
 			key: 'onMouseMove',
 			value: function onMouseMove(e) {
+				e = normalizeTouchEvent(e);
 				// touch has to be started first
 				if (this.state !== TOUCH_STARTED) return;
 				// update last pointer position
@@ -21939,6 +21972,7 @@
 		}, {
 			key: 'onMouseOut',
 			value: function onMouseOut(e) {
+				e = normalizeTouchEvent(e);
 				// touch has to be started first
 				if (this.state !== TOUCH_STARTED) return;
 				// update last pointer position
@@ -21949,6 +21983,7 @@
 		}, {
 			key: 'onMouseUp',
 			value: function onMouseUp(e) {
+				e = normalizeTouchEvent(e);
 				// touch has to be started first
 				if (this.state !== TOUCH_STARTED) return;
 				// update last pointer position
@@ -22247,6 +22282,57 @@
 
 /***/ },
 /* 190 */
+/***/ function(module, exports) {
+
+	// TODO: provide support for touch-enabled browsers instead of fallback to mouse events
+	// a dictionary of supported events
+	//var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
+	// disable touch atm
+	'use strict';
+	
+	var SUPPORT_TOUCH = false;
+	var MOUSE_FALLBACK = {
+		touchstart: 'mousedown',
+		touchend: 'mouseup',
+		touchcancel: 'mouseout',
+		touchmove: 'mousemove'
+	};
+	
+	function normalizeTouchEvent(e) {
+		var j = {
+			clientX: e.clientX,
+			clientY: e.clientY
+		};
+		if (e.touches) {
+			j = {
+				clientX: e.touches[0].clientX,
+				clientY: e.touches[0].clientY
+			};
+		}
+		return j;
+	}
+	
+	function getEventName(event) {
+		if (!SUPPORT_TOUCH) event = MOUSE_FALLBACK[event] ? MOUSE_FALLBACK[event] : event;
+		return event;
+	}
+	
+	function attachListener(element, event, fn) {
+		element.addEventListener(getEventName(event), fn);
+	}
+	
+	function removeListener(element, event, fn) {
+		element.removeEventListener(getEventName(event), fn);
+	}
+	
+	module.exports = {
+		attachListener: attachListener,
+		removeListener: removeListener,
+		normalizeTouchEvent: normalizeTouchEvent
+	};
+
+/***/ },
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22352,7 +22438,7 @@
 	module.exports = TouchableOpacity;
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22505,7 +22591,7 @@
 	}];
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22741,7 +22827,7 @@
 	}];
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23196,7 +23282,7 @@
 	});
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23222,7 +23308,7 @@
 	var Text = React.Text;
 	var View = React.View;
 	
-	var ImageCapInsetsExample = __webpack_require__(195);
+	var ImageCapInsetsExample = __webpack_require__(196);
 	
 	exports.framework = 'React';
 	exports.title = '<Image>';
@@ -23244,10 +23330,10 @@
 	    return React.createElement(
 	      View,
 	      { style: styles.horizontal },
-	      React.createElement(Image, { source: __webpack_require__(197), style: styles.icon }),
 	      React.createElement(Image, { source: __webpack_require__(198), style: styles.icon }),
 	      React.createElement(Image, { source: __webpack_require__(199), style: styles.icon }),
-	      React.createElement(Image, { source: __webpack_require__(200), style: styles.icon })
+	      React.createElement(Image, { source: __webpack_require__(200), style: styles.icon }),
+	      React.createElement(Image, { source: __webpack_require__(201), style: styles.icon })
 	    );
 	  }
 	}, {
@@ -23366,19 +23452,19 @@
 	      View,
 	      { style: styles.horizontal },
 	      React.createElement(Image, {
-	        source: __webpack_require__(197),
+	        source: __webpack_require__(198),
 	        style: [styles.icon, { tintColor: 'blue' }]
 	      }),
 	      React.createElement(Image, {
-	        source: __webpack_require__(197),
+	        source: __webpack_require__(198),
 	        style: [styles.icon, styles.leftMargin, { tintColor: 'green' }]
 	      }),
 	      React.createElement(Image, {
-	        source: __webpack_require__(197),
+	        source: __webpack_require__(198),
 	        style: [styles.icon, styles.leftMargin, { tintColor: 'red' }]
 	      }),
 	      React.createElement(Image, {
-	        source: __webpack_require__(197),
+	        source: __webpack_require__(198),
 	        style: [styles.icon, styles.leftMargin, { tintColor: 'black' }]
 	      })
 	    );
@@ -23482,7 +23568,7 @@
 	});
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23525,7 +23611,7 @@
 	          'capInsets: none'
 	        ),
 	        React.createElement(Image, {
-	          source: __webpack_require__(196),
+	          source: __webpack_require__(197),
 	          style: styles.storyBackground,
 	          capInsets: { left: 0, right: 0, bottom: 0, top: 0 }
 	        })
@@ -23539,7 +23625,7 @@
 	          'capInsets: 15'
 	        ),
 	        React.createElement(Image, {
-	          source: __webpack_require__(196),
+	          source: __webpack_require__(197),
 	          style: styles.storyBackground,
 	          capInsets: { left: 15, right: 15, bottom: 15, top: 15 }
 	        })
@@ -23571,37 +23657,37 @@
 	module.exports = ImageCapInsetsExample;
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports) {
 
 	module.exports = {"uri":"images/story-background.png","isStatic":true};
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports) {
 
 	module.exports = {"uri":"images/uie_thumb_normal.png","isStatic":true};
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	module.exports = {"uri":"images/uie_thumb_selected.png","isStatic":true};
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	module.exports = {"uri":"images/uie_comment_normal.png","isStatic":true};
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports) {
 
 	module.exports = {"uri":"images/uie_comment_highlighted.png","isStatic":true};
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23844,7 +23930,7 @@
 	});
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23964,7 +24050,7 @@
 	});
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
