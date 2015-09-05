@@ -22047,18 +22047,26 @@
 
 	// TODO: provide support for touch-enabled browsers instead of fallback to mouse events
 	// a dictionary of supported events
-	//var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
-	// disable touch atm
 	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var SUPPORT_TOUCH = false;
+	var SUPPORT_TOUCH = 'ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch;
+	var SUPPORT_IE10_POINTERS = window.MSPointerEvent;
+	var SUPPORT_POINTERS = window.PointerEvent;
+	
 	var MOUSE_POINTERS = {
 		pointerdown: 'mousedown',
 		pointerup: 'mouseup',
 		pointerout: 'mouseout',
 		pointermove: 'mousemove'
+	};
+	
+	var TOUCH_POINTERS = {
+		pointerdown: 'touchstart',
+		pointerup: 'touchend',
+		pointerout: 'touchcancel',
+		pointermove: 'touchmove'
 	};
 	
 	var IE10_POINTERS = {
@@ -22085,12 +22093,17 @@
 	function getEventName(event) {
 		var events = {};
 		// there is support for pointer events in IE10
-		if (window.MSPointerEvent) {
+		if (SUPPORT_IE10_POINTERS) {
 			events = _extends({}, events, IE10_POINTERS);
-			// there is no pointer event support, falls to mouse events
-		} else if (!window.PointerEvent) {
-				events = _extends({}, events, MOUSE_POINTERS);
-			}
+			// there is pointer support, do nothing
+		} else if (SUPPORT_POINTERS) {
+				// there is touch support
+			} else if (SUPPORT_TOUCH) {
+					events = _extends({}, events, TOUCH_POINTERS);
+					// there is no support... mouse come at me!
+				} else {
+						events = _extends({}, events, MOUSE_POINTERS);
+					}
 		return events[event] ? events[event] : event;
 	}
 	
