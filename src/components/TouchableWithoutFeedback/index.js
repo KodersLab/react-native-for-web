@@ -60,18 +60,18 @@ class TouchableWithoutFeedback extends React.Component{
       this.touchable = new Touchable(findDOMNode(this.refs.main));
     }
     // binds events
-    this.touchable.on('touchstart', this.onMouseDown);
-    this.touchable.on('touchend', this.onMouseUp);
-    this.touchable.on('touchcancel', this.reset);
+    this.touchable.on('pressstart', this.onMouseDown);
+    this.touchable.on('pressend', this.onMouseUp);
+    this.touchable.on('presscancel', this.reset);
   }
 
   componentWillUnmount(){
     // if no touchable instance exists, return
     if(!this.touchable) return;
     // unbind touchable events
-    this.touchable.off('touchstart', this.onMouseDown);
-    this.touchable.off('touchend', this.onMouseUp);
-    this.touchable.off('touchcancel', this.reset);
+    this.touchable.off('pressstart', this.onMouseDown);
+    this.touchable.off('pressend', this.onMouseUp);
+    this.touchable.off('presscancel', this.reset);
     this.touchable.destroy();
   }
 

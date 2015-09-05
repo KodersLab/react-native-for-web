@@ -3,11 +3,18 @@
 //var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
 // disable touch atm
 var SUPPORT_TOUCH = false;
-var MOUSE_FALLBACK = {
-	touchstart: 'mousedown',
-	touchend: 'mouseup',
-	touchcancel: 'mouseout',
-	touchmove: 'mousemove'
+var MOUSE_POINTERS = {
+	pointerdown: 'mousedown',
+	pointerup: 'mouseup',
+	pointerout: 'mouseout',
+	pointermove: 'mousemove'
+};
+
+var IE10_POINTERS = {
+	pointerdown: 'MSPointerDown',
+	pointerup: 'MSPointerUp',
+	pointerout: 'MSPointerOut',
+	pointermove: 'MSPointerMove'
 };
 
 function normalizeTouchEvent(e){
@@ -25,8 +32,21 @@ function normalizeTouchEvent(e){
 }
 
 function getEventName(event){
-	if(!SUPPORT_TOUCH) event = MOUSE_FALLBACK[event] ? MOUSE_FALLBACK[event] : event;
-	return event;
+	var events = {};
+	// there is support for pointer events in IE10
+	if(window.MSPointerEvent){
+		events = {
+			...events,
+			...IE10_POINTERS
+		}
+	// there is no pointer event support, falls to mouse events
+	}else if(!window.PointerEvent){
+		events = {
+			...events,
+			...MOUSE_POINTERS
+		};
+	}
+	return events[event] ? events[event] : event;
 }
 
 function attachListener(element, event, fn){

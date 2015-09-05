@@ -21,7 +21,7 @@ class Text extends React.Component{
 				this.touchable = new Touchable(findDOMNode(this.refs.main));
 				
 				// binds events
-				this.touchable.on('touchend', this.onMouseUp);
+				this.touchable.on('pressend', this.onMouseUp);
 			}
 		}
 	}
@@ -39,7 +39,7 @@ class Text extends React.Component{
 		// if no touchable instance exists, return
 		if(!this.touchable) return;
 		// unbind touchable events
-		this.touchable.off('touchend', this.onMouseUp);
+		this.touchable.off('pressend', this.onMouseUp);
 		this.touchable.destroy();
 		this.touchable = null;
 	}

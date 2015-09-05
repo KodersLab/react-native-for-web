@@ -68,10 +68,10 @@ class Touchable extends EventEmitter{
 		this.onMouseUp = this.onMouseUp.bind(this);
 		
 		// attach dom event listeners
-		attachListener(this.node, 'touchstart', this.onMouseDown);
-		attachListener(window, 'touchmove', this.onMouseMove);
-		attachListener(window, 'touchcancel', this.onMouseOut);
-		attachListener(window, 'touchend', this.onMouseUp);
+		attachListener(this.node, 'pointerdown', this.onMouseDown);
+		attachListener(window, 'pointermove', this.onMouseMove);
+		attachListener(window, 'pointerout', this.onMouseOut);
+		attachListener(window, 'pointerup', this.onMouseUp);
 	}
 	
 	destroy(){
@@ -82,10 +82,10 @@ class Touchable extends EventEmitter{
 		this.lastPointer = null;
 		
 		// detach dom event listeners
-		removeListener(this.node, 'touchstart', this.onMouseDown);
-		removeListener(window, 'touchmove', this.onMouseMove);
-		removeListener(window, 'touchcancel', this.onMouseOut);
-		removeListener(window, 'touchend', this.onMouseUp);
+		removeListener(this.node, 'pointerdown', this.onMouseDown);
+		removeListener(window, 'pointermove', this.onMouseMove);
+		removeListener(window, 'pointerout', this.onMouseOut);
+		removeListener(window, 'pointerup', this.onMouseUp);
 	}
 	
 	onMouseDown(e){
@@ -98,7 +98,7 @@ class Touchable extends EventEmitter{
 		this.scrollables = collectParentScrollables(this.node);
 		// trigger the touchstart event
 		this.state = TOUCH_STARTED;
-		this.emit('touchstart');
+		this.emit('pressstart');
 	}
 	
 	onMouseMove(e){
@@ -131,7 +131,7 @@ class Touchable extends EventEmitter{
 		if(this.cancelIfMoving()) return;
 		// trigger touch end
 		this.state = NO_EVENT;
-		this.emit('touchend');
+		this.emit('pressend');
 	}
 	
 	cancelIfMoving(){
@@ -148,7 +148,7 @@ class Touchable extends EventEmitter{
 	emitTouchCancel(){
 		// emit touch cancel
 		this.state = NO_EVENT;
-		this.emit('touchcancel');
+		this.emit('presscancel');
 		return true;
 	}
 }
