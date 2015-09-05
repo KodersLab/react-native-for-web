@@ -31,7 +31,7 @@ module.exports = (style) => {
 			solvedStyle[propsKeys[i]] = style[propsKeys[i]];
 		}
 	}
-	console.log('solveConflict', solvedStyle);
+
 	// returns the new style object
 	return solvedStyle;
 };

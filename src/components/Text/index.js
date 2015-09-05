@@ -5,7 +5,7 @@ var browserifyStyle = require('../../utils/style/browserify')
 class Text extends React.Component{
 	render(){
 		// deconstruct props and extract the needed ones.
-		var {suppressHighlighting, style, ...props} = this.props;
+		var {suppressHighlighting, style, children, ...props} = this.props;
 		
 		// classNames
 		var classNames = ['text'];
@@ -15,7 +15,7 @@ class Text extends React.Component{
 		
 		// return the component
 		return <span {...props} className={classNames.join(' ')} style={browserifyStyle(style)}>
-			{this.props.children}
+			{children}
 		</span>;
 	}
 }

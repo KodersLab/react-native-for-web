@@ -5,7 +5,7 @@ var browserifyStyle = require('../../utils/style/browserify')
 class View extends React.Component{
 	render(){
 		// deconstruct props and extract the needed ones.
-		var {pointerEvents, style, ...props} = this.props;
+		var {pointerEvents, style, children, ...props} = this.props;
 		
 		// classNames
 		var classNames = ['view'];
@@ -15,7 +15,7 @@ class View extends React.Component{
 		
 		// return the component
 		return <div {...props} className={classNames.join(' ')} style={browserifyStyle(style)}>
-			{this.props.children}
+			{children}
 		</div>;
 	}
 }

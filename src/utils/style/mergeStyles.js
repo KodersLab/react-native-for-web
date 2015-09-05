@@ -1,7 +1,8 @@
 // This module is responsible for merging an array of nullish,
 // styles or array of styles into a single plain object,
 // this way we could even optimize the outgoing css
-module.exports = (styles) => {
+
+function mergeStyles(styles) {
 	// by default, return an empty object.
 	var mergedStyle = {};
 	
@@ -11,6 +12,8 @@ module.exports = (styles) => {
 		var style = styles[i];
 		// if style is nullish, continue the loop to the next one
 		if(!style) continue;
+		// if is array, flatten down
+		if(Array.isArray(style)) style = mergeStyles(style);
 		// merge into the merged one
 		mergedStyle = {
 			...mergedStyle,
@@ -20,4 +23,6 @@ module.exports = (styles) => {
 	
 	// return the styles as a new single object! :D
 	return mergedStyle;
-};
+}
+
+module.exports = mergeStyles;
