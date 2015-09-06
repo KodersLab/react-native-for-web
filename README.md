@@ -89,7 +89,7 @@ npm run build
  - [ ] Text
    - [ ] numberOfLines
    - [ ] onLayout
-   - [ ] onPress
+   - [X] onPress
    - [X] suppressHighlighting
    - [X] style
    - [X] testID
@@ -187,7 +187,7 @@ npm run build
    - [X] activeOpacity
 
  - [ ] TouchableWithoutFeedback
-   - [ ] accessible
+   - [X] accessible *not planned to support*
    - [X] delayLongPress
    - [X] delayPressIn
    - [X] delayPressOut
