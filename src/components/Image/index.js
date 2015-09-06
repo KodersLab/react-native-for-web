@@ -1,6 +1,7 @@
 var React = require('react');
 var Radium = require('radium');
 var browserifyStyle = require('../../utils/style/browserify');
+var mergeStyles = require('../../utils/style/mergeStyles');
 
 class Image extends React.Component{
   constructor(){
@@ -102,6 +103,13 @@ class Image extends React.Component{
       
     // default classNames
     var classNames = ['image'];
+    
+      
+    // try to pick resizeMode from the style definition
+    var mergedStyle = mergeStyles(style);
+    if(!resizeMode && mergedStyle.resizeMode){
+      var {resizeMode, ...style} = mergedStyle;
+    }
 
     // get the props to be merged into style
     if(resizeMode) classNames.push('resize-mode-' + resizeMode);

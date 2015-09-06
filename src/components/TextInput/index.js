@@ -55,6 +55,7 @@ class TextInput extends React.Component{
       ref: 'main',
       className: classNames.join(' '),
 
+      type,
       value,
       defaultValue,
       placeholder,

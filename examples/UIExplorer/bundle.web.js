@@ -21068,6 +21068,9 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function mergeStyles(styles) {
+		// if given is not an array, make it so
+		styles = Array.isArray(styles) ? styles : [styles];
+	
 		// by default, return an empty object.
 		var mergedStyle = {};
 	
@@ -21301,6 +21304,7 @@
 	var React = __webpack_require__(4);
 	var Radium = __webpack_require__(163);
 	var browserifyStyle = __webpack_require__(178);
+	var mergeStyles = __webpack_require__(179);
 	
 	var Image = (function (_React$Component) {
 	  _inherits(Image, _React$Component);
@@ -21442,6 +21446,14 @@
 	
 	      // default classNames
 	      var classNames = ['image'];
+	
+	      // try to pick resizeMode from the style definition
+	      var mergedStyle = mergeStyles(style);
+	      if (!resizeMode && mergedStyle.resizeMode) {
+	        var resizeMode = mergedStyle.resizeMode;
+	
+	        var style = _objectWithoutProperties(mergedStyle, ['resizeMode']);
+	      }
 	
 	      // get the props to be merged into style
 	      if (resizeMode) classNames.push('resize-mode-' + resizeMode);
@@ -22226,6 +22238,7 @@
 	        ref: 'main',
 	        className: classNames.join(' '),
 	
+	        type: type,
 	        value: value,
 	        defaultValue: defaultValue,
 	        placeholder: placeholder,
