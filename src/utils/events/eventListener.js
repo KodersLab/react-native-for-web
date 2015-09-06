@@ -1,6 +1,7 @@
 // TODO: provide support for touch-enabled browsers instead of fallback to mouse events
 // a dictionary of supported events
-var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
+//var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
+var SUPPORT_TOUCH = false; // disable until touch support is fixed
 var SUPPORT_IE10_POINTERS = window.MSPointerEvent;
 var SUPPORT_POINTERS = window.PointerEvent;
 
