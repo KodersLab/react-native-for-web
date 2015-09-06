@@ -182,11 +182,12 @@ npm run build
    - [X] style
    - [ ] underlayColor
 
- - [ ] TouchableOpacity
-   - [ ] ...TouchableWithoutFeedback properties
+ - [X] TouchableOpacity
+   - [X] ...TouchableWithoutFeedback properties
+   - [X] style *as of 0.10.0*
    - [X] activeOpacity
 
- - [ ] TouchableWithoutFeedback
+ - [X] TouchableWithoutFeedback
    - [X] accessible *not planned to support*
    - [X] delayLongPress
    - [X] delayPressIn

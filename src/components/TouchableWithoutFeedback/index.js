@@ -78,12 +78,16 @@ class TouchableWithoutFeedback extends React.Component{
   render(){
     // deconstruct from the props
     var {children} = this.props;
+    
+    // child style
+    if(children){
+      var {style} = children.props || {};
+    }
 
     // returns the component
     return React.cloneElement(children, {
       ref: 'main',
-      style: [styles.main]
-          .concat(Array.isArray(children.props.style) ? children.props.style : [children.props.style])
+      style: [styles.main].concat(Array.isArray(style) ? style : [style])
     });
   }
 }

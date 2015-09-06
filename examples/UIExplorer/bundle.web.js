@@ -22391,10 +22391,17 @@
 	      // deconstruct from the props
 	      var children = this.props.children;
 	
+	      // child style
+	      if (children) {
+	        var _ref = children.props || {};
+	
+	        var style = _ref.style;
+	      }
+	
 	      // returns the component
 	      return React.cloneElement(children, {
 	        ref: 'main',
-	        style: [styles.main].concat(Array.isArray(children.props.style) ? children.props.style : [children.props.style])
+	        style: [styles.main].concat(Array.isArray(style) ? style : [style])
 	      });
 	    }
 	  }]);
@@ -22509,7 +22516,7 @@
 	        _extends({ ref: 'main' }, props),
 	        React.createElement(
 	          View,
-	          { style: [{ opacity: this.state.opacity }].concat(Array.isArray(style) ? style : [style]) },
+	          { style: (Array.isArray(style) ? style : [style]).concat([{ opacity: this.state.opacity }]) },
 	          this.props.children
 	        )
 	      );

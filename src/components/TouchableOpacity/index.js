@@ -54,7 +54,7 @@ class TouchableOpacity extends React.Component{
     var {style, activeOpacity, ...props} = this.props;
 
     return <TouchableWithoutFeedback ref='main' {...props}>
-      <View style={[{opacity: this.state.opacity}].concat(Array.isArray(style) ? style : [style])}>
+      <View style={(Array.isArray(style) ? style : [style]).concat([{opacity: this.state.opacity}])}>
         {this.props.children}
       </View>
     </TouchableWithoutFeedback>;
