@@ -3,6 +3,9 @@
 // this way we could even optimize the outgoing css
 
 function mergeStyles(styles) {
+	// if given is not an array, make it so
+	styles = Array.isArray(styles) ? styles : [styles];
+	
 	// by default, return an empty object.
 	var mergedStyle = {};
 	
