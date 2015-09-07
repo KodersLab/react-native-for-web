@@ -1,11 +1,15 @@
 {
   "name": "react-native-for-web",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A set of classes and react components to make work your react-native app in a browser. (with some limitations obviously)",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp styles && exit 0"
+    "clean": "rimraf lib",
+    "build:styles": "gulp styles",
+    "build:lib": "babel src --out-dir lib",
+    "build": "npm run build:lib && npm run build:style",
+    "prepublish": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -38,6 +42,7 @@
     "gulp-less": "^3.0.3",
     "gulp-postcss": "^5.1.10",
     "gulp-sourcemaps": "^1.5.2",
+    "rimraf": "^2.4.3",
     "webpack": "^1.12.1"
   }
 }
