@@ -8,7 +8,7 @@
     "clean": "rimraf lib",
     "build:styles": "gulp styles",
     "build:lib": "babel src --out-dir lib",
-    "build": "npm run build:lib && npm run build:style",
+    "build": "npm run build:lib && npm run build:styles",
     "prepublish": "npm run clean && npm run build"
   },
   "repository": {
