@@ -89,7 +89,7 @@ class Touchable extends EventEmitter{
 	}
 	
 	onMouseDown(e){
-		e = normalizeTouchEvent(e);
+		var e = normalizeTouchEvent(e);
 		// to mouse down, you should first be in no_event
 		if(this.state !== NO_EVENT) return;
 		// store pointer position
@@ -102,36 +102,42 @@ class Touchable extends EventEmitter{
 	}
 	
 	onMouseMove(e){
-		e = normalizeTouchEvent(e);
+		var e = normalizeTouchEvent(e);
 		// touch has to be started first
 		if(this.state !== TOUCH_STARTED) return;
-		// update last pointer position
-		this.lastPointer = {x: e.clientX, y: e.clientY};		
+		// update last position
+		this.updateLastPointerFromEvent(e);	
 		// cancel if moving
 		this.cancelIfMoving();
 	}
 	
 	onMouseOut(e){
-		e = normalizeTouchEvent(e);
+		var e = normalizeTouchEvent(e);
 		// touch has to be started first
 		if(this.state !== TOUCH_STARTED) return;
-		// update last pointer position
-		this.lastPointer = {x: e.clientX, y: e.clientY};		
+		// update last position
+		this.updateLastPointerFromEvent(e);
 		// cancel if moving
 		this.emitTouchCancel();
 	}
 	
 	onMouseUp(e){
-		e = normalizeTouchEvent(e);
 		// touch has to be started first
 		if(this.state !== TOUCH_STARTED) return;
-		// update last pointer position
-		this.lastPointer = {x: e.clientX, y: e.clientY};		
+		// update last position
+		this.updateLastPointerFromEvent(e);
 		// cancel if moving
 		if(this.cancelIfMoving()) return;
 		// trigger touch end
 		this.state = NO_EVENT;
 		this.emit('pressend');
+	}
+	
+	updateLastPointerFromEvent(e){
+		// normalize event
+		var {clientX = null, clientY = null} = normalizeTouchEvent(e);
+		// update last pointer position if possible
+		if(!(clientX === null || clientY === null)) this.lastPointer = {x: clientX, y: clientY};
 	}
 	
 	cancelIfMoving(){

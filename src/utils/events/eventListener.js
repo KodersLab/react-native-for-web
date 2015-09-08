@@ -1,7 +1,6 @@
 // TODO: provide support for touch-enabled browsers instead of fallback to mouse events
 // a dictionary of supported events
-//var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
-var SUPPORT_TOUCH = false; // disable until touch support is fixed
+var SUPPORT_TOUCH = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
 var SUPPORT_IE10_POINTERS = window.MSPointerEvent;
 var SUPPORT_POINTERS = window.PointerEvent;
 
@@ -32,9 +31,11 @@ function normalizeTouchEvent(e){
 		clientY: e.clientY
 	};
 	if(e.touches){
-		j = {
-			clientX: e.touches[0].clientX,
-			clientY: e.touches[0].clientY
+		for(var i = 0; i < e.touches.length; i++){		
+			j = {
+				clientX: e.touches[i].clientX,
+				clientY: e.touches[i].clientY
+			}
 		}
 	}
 	return j;
