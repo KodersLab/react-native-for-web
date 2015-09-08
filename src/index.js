@@ -4,6 +4,7 @@ var React = require('react');
 React.StyleSheet = require('./classes/StyleSheet');
 React.AppRegistry = require('./classes/AppRegistry');
 React.PixelRatio = require('./classes/PixelRatio');
+React.AsyncStorage = require('./classes/AsyncStorage');
 
 // export the components
 React.View = require('./components/View');
