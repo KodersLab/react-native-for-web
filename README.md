@@ -59,6 +59,18 @@ npm run build
    - [X] registerConfig
    - [X] registerRunnable
    - [X] runApplication
+   
+ - [X] AsyncStorage
+   - [X] getItem
+   - [X] setItem
+   - [X] removeItem
+   - [X] mergeItem
+   - [X] clear
+   - [X] getAllKeys
+   - [X] multiGet
+   - [X] multiSet
+   - [X] multiRemove
+   - [X] multiMerge
 
  - [ ] View
    - [X] accessible *not planned to support*
