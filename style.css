@@ -190,6 +190,9 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 100;
 }
 
 /*# sourceMappingURL=style.css.map */
