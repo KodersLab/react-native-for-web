@@ -161,9 +161,9 @@ npm run build
    - [ ] autoCorrect
    - [X] autoFocus
    - [ ] clearButtonMode
-   - [X] clearTextOnFocus
+   - [ ] clearTextOnFocus
    - [X] defaultValue
-   - [X] editable
+   - [ ] editable
    - [ ] enablesReturnKeyAutomatically
    - [ ] keyboardType
    - [ ] maxLength
@@ -179,7 +179,7 @@ npm run build
    - [ ] placeholderTextColor
    - [ ] returnKeyType
    - [ ] secureTextEntry
-   - [X] selectTextOnFocus
+   - [ ] selectTextOnFocus
    - [ ] selectionState
    - [X] style
    - [X] testID

@@ -24631,17 +24631,7 @@
 	  }, {
 	    key: 'onFocus',
 	    value: function onFocus(e) {
-	      // deconstruct
-	      var _props = this.props;
-	      var onFocus = _props.onFocus;
-	      var selectTextOnFocus = _props.selectTextOnFocus;
-	      var clearTextOnFocus = _props.clearTextOnFocus;
-	
-	      // if select or clear, perform it.
-	      if (clearTextOnFocus) this.refs.main.value = '';
-	      if (selectTextOnFocus) this.refs.main.select();
-	      // call event listener
-	      if (onFocus) onFocus(e);
+	      if (this.props.onFocus) this.props.onFocus(e);
 	    }
 	
 	    // onBlur support
@@ -24666,26 +24656,22 @@
 	      var type = 'text';
 	
 	      // copy over the same props to the new props for the input
-	      var _props2 = this.props;
-	      var defaultValue = _props2.defaultValue;
-	      var value = _props2.value;
-	      var placeholder = _props2.placeholder;
-	      var multiline = _props2.multiline;
-	      var secureTextEntry = _props2.secureTextEntry;
-	      var clearTextOnFocus = _props2.clearTextOnFocus;
-	      var selectTextOnFocus = _props2.selectTextOnFocus;
-	      var _props2$editable = _props2.editable;
-	      var editable = _props2$editable === undefined ? true : _props2$editable;
-	      var autoFocus = _props2.autoFocus;
-	      var textAlign = _props2.textAlign;
-	      var style = _props2.style;
-	      var children = _props2.children;
-	      var onChange = _props2.onChange;
-	      var onBlur = _props2.onBlur;
-	      var onFocus = _props2.onFocus;
-	      var onChangeText = _props2.onChangeText;
+	      var _props = this.props;
+	      var defaultValue = _props.defaultValue;
+	      var value = _props.value;
+	      var placeholder = _props.placeholder;
+	      var multiline = _props.multiline;
+	      var secureTextEntry = _props.secureTextEntry;
+	      var autoFocus = _props.autoFocus;
+	      var textAlign = _props.textAlign;
+	      var style = _props.style;
+	      var children = _props.children;
+	      var onChange = _props.onChange;
+	      var onBlur = _props.onBlur;
+	      var onFocus = _props.onFocus;
+	      var onChangeText = _props.onChangeText;
 	
-	      var props = _objectWithoutProperties(_props2, ['defaultValue', 'value', 'placeholder', 'multiline', 'secureTextEntry', 'clearTextOnFocus', 'selectTextOnFocus', 'editable', 'autoFocus', 'textAlign', 'style', 'children', 'onChange', 'onBlur', 'onFocus', 'onChangeText']);
+	      var props = _objectWithoutProperties(_props, ['defaultValue', 'value', 'placeholder', 'multiline', 'secureTextEntry', 'autoFocus', 'textAlign', 'style', 'children', 'onChange', 'onBlur', 'onFocus', 'onChangeText']);
 	
 	      // init the classNames
 	      var classNames = ['text-input'];
@@ -24712,7 +24698,6 @@
 	        value: value,
 	        defaultValue: defaultValue,
 	        placeholder: placeholder,
-	        readOnly: !editable,
 	        style: browserifyStyle(style),
 	
 	        onChange: function onChange(e) {
