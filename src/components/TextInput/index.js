@@ -11,7 +11,13 @@ class TextInput extends React.Component{
 
   // onFocus support
   onFocus(e){
-    if(this.props.onFocus) this.props.onFocus(e);
+    // deconstruct
+    var {onFocus, selectTextOnFocus, clearTextOnFocus} = this.props;
+    // if select or clear, perform it.
+    if(clearTextOnFocus) this.refs.main.value = '';
+    if(selectTextOnFocus) this.refs.main.select();
+    // call event listener
+    if(onFocus) onFocus(e);
   }
 
   // onBlur support
@@ -30,7 +36,8 @@ class TextInput extends React.Component{
     var type = 'text';
 
     // copy over the same props to the new props for the input
-    var {defaultValue, value, placeholder, multiline, secureTextEntry, 
+    var {defaultValue, value, placeholder, multiline, secureTextEntry,
+    clearTextOnFocus, selectTextOnFocus, editable = true,
 		autoFocus, textAlign, style, children,
 		onChange, onBlur, onFocus, onChangeText, ...props} = this.props;
 
@@ -59,6 +66,7 @@ class TextInput extends React.Component{
       value,
       defaultValue,
       placeholder,
+      readOnly: !editable,
       style: browserifyStyle(style),
 
       onChange: (e) => this.onChange(e),
