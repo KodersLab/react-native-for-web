@@ -6,8 +6,8 @@ var Touchable = require('../../utils/events/Touchable');
 
 class Text extends React.Component{
 	
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		
 		// autobind
 		this.onMouseUp = this.onMouseUp.bind(this);

@@ -5,8 +5,8 @@ var Touchable = require('../../utils/events/Touchable');
 var {findDOMNode} = require('react-dom');
 
 class TouchableOpacity extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       opacity: 1
     };
