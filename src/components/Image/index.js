@@ -19,15 +19,18 @@ class Image extends React.Component{
     this.onError = this.onError.bind(this);
   }
   
-  _loadImage(uri = null){
-    // if there is a previous image, then detach the event handlers to avoid double occurence
+  // cancel an existing image being loaded
+  _cancelLoadImage(){
     if(this.image){
-      this.image.onload = undefined;
-      this.image.onerror = undefined;
+      this.image.onload = null;
+      this.image.onerror = null;
       this.image = null;
     }
-    // if null is passed, it was just a reset
-    if(uri === null) return;
+  }
+  
+  _loadImage(uri){
+    // if there is a previous image, then detach the event handlers to avoid double occurence
+    this._cancelLoadImage();
     // create a new image source
     this.image = new window.Image();
     // attach the event listeners
@@ -38,14 +41,12 @@ class Image extends React.Component{
   
   _uriChanged(props){
     // if source is null, pass
-    if(props === null) return this._loadImage(null);
-    // checks if uri changed
-    var {source: {uri}} = props;
+    if(props === null) return this._cancelLoadImage();
+    // checks if uri changed and return if not
+    var {source: {uri}, onLoadStart, onProgress} = props;
     if(uri == this.state.currentUri) return;
     // trigger the loadImage function for the new image
     this._loadImage(uri);
-    // deconstruct the needed props
-    var {onLoadStart, onProgress} = this.props;
     // triggers the onLoadStart
     if(onLoadStart) onLoadStart();
     // TODO: is there a on progress event?
@@ -84,15 +85,15 @@ class Image extends React.Component{
       });
   }
   
-  // on componentDidMount e componentDidUpdate, call the uriChanged, and on componentDidUnmount detach
+  // on componentDidMount e componentWillReceiveProps, call the uriChanged, and on componentDidUnmount detach
   componentDidMount(){
     this._uriChanged(this.props);
   }
-  componentDidUpdate(){
-    this._uriChanged(this.props);
+  componentWillReceiveProps(props){
+    this._uriChanged(props);
   }
   componentWillUnmount(){
-    this._uriChanged(null);
+    this._cancelLoadImage();
   }
   
   // actual image rendering
@@ -134,7 +135,8 @@ Image = Radium(Image);
 Image.resizeMode = {
   cover: 'cover',
   contain: 'contain',
-  stretch: 'stretch'
+  stretch: 'stretch',
+  none: 'none'
 };
 
 module.exports = Image;

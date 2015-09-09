@@ -128,7 +128,10 @@ span {
   background-size: contain;
 }
 #app .image.resize-mode-stretch {
-  background-size: stretch;
+  background-size: 100% 100%;
+}
+#app .image.resize-mode-none {
+  background-size: none;
 }
 #app .scroll-view {
   box-sizing: border-box;
@@ -187,6 +190,9 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 100;
 }
 
 /*# sourceMappingURL=style.css.map */

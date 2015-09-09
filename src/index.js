@@ -1,23 +1,25 @@
 var React = require('react');
 
-// export the classes
-React.StyleSheet = require('./classes/StyleSheet');
-React.AppRegistry = require('./classes/AppRegistry');
-React.PixelRatio = require('./classes/PixelRatio');
-React.AsyncStorage = require('./classes/AsyncStorage');
-
-// export the components
-React.View = require('./components/View');
-React.ScrollView = require('./components/ScrollView');
-React.Image = require('./components/Image');
-React.Text = require('./components/Text');
-React.TextInput = require('./components/TextInput');
-React.TouchableWithoutFeedback = require('./components/TouchableWithoutFeedback');
-React.TouchableOpacity = require('./components/TouchableOpacity');
-React.PickerIOS = require('./components/PickerIOS');
-
-// todo components
-React.TouchableHighlight = require('./components/TouchableWithoutFeedback');
-
-// TODO: consider using the spread operator to inject new classes?
-module.exports = React;
+module.exports = {
+	// export react methods as a reference
+	...React,
+	
+	// export the classes
+	StyleSheet: require('./classes/StyleSheet'),
+	AppRegistry: require('./classes/AppRegistry'),
+	PixelRatio: require('./classes/PixelRatio'),
+	AsyncStorage: require('./classes/AsyncStorage'),
+	
+	// export the components
+	View: require('./components/View'),
+	ScrollView: require('./components/ScrollView'),
+	Image: require('./components/Image'),
+	Text: require('./components/Text'),
+	TextInput: require('./components/TextInput'),
+	TouchableWithoutFeedback: require('./components/TouchableWithoutFeedback'),
+	TouchableOpacity: require('./components/TouchableOpacity'),
+	PickerIOS: require('./components/PickerIOS'),
+	
+	// todo components
+	TouchableHighlight: require('./components/TouchableWithoutFeedback')
+};
