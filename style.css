@@ -128,7 +128,10 @@ span {
   background-size: contain;
 }
 #app .image.resize-mode-stretch {
-  background-size: stretch;
+  background-size: 100% 100%;
+}
+#app .image.resize-mode-none {
+  background-size: none;
 }
 #app .scroll-view {
   box-sizing: border-box;
