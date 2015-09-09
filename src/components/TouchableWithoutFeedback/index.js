@@ -5,8 +5,8 @@ var browserifyStyle = require('../../utils/style/browserify');
 var Touchable = require('../../utils/events/Touchable');
 
 class TouchableWithoutFeedback extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     // autobinding
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);

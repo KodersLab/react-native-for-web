@@ -8,7 +8,9 @@ var EXAMPLES = [
   require('./examples/ImageExample'),
   require('./examples/TouchableExample'),
   require('./examples/ScrollViewExample'),
-  require('./examples/TextInputExample')
+  require('./examples/TextInputExample'),
+  require('./examples/PickerIOSExample'),
+  require('./examples/AsyncStorageExample')
 ];
 
 class App extends React.Component{

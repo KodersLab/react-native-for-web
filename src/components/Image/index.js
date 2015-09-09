@@ -4,8 +4,8 @@ var browserifyStyle = require('../../utils/style/browserify');
 var mergeStyles = require('../../utils/style/mergeStyles');
 
 class Image extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     // default image state
     this.image = null;
     this.state = {

@@ -14,6 +14,9 @@ React.Text = require('./components/Text');
 React.TextInput = require('./components/TextInput');
 React.TouchableWithoutFeedback = require('./components/TouchableWithoutFeedback');
 React.TouchableOpacity = require('./components/TouchableOpacity');
+React.PickerIOS = require('./components/PickerIOS');
+
+// todo components
 React.TouchableHighlight = require('./components/TouchableWithoutFeedback');
 
 // TODO: consider using the spread operator to inject new classes?
