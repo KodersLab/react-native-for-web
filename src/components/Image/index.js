@@ -109,7 +109,7 @@ class Image extends React.Component{
     // try to pick resizeMode from the style definition
     var mergedStyle = mergeStyles(style);
     if(!resizeMode && mergedStyle.resizeMode){
-      var {resizeMode, ...style} = mergedStyle;
+      var {resizeMode} = mergedStyle;
     }
 
     // get the props to be merged into style
