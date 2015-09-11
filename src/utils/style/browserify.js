@@ -6,13 +6,27 @@ var mergeStyles = require('./mergeStyles');
 var decoupleBidirectionalProps = require('./decoupleBidirectionalProps');
 var solveConflicts = require('./solveConflicts');
 var applyPxIfNeeded = require('./applyPxIfNeeded');
+var omitStrangeProps = require('./omitStrangeProps');
 
-module.exports = (...styles) => {
+function browserifyStyle(style){
+	// if it is nullish, skip and return
+	if(!style) return style;
+	// if it is an array, recurse it.
+	if(Array.isArray(style)) return style.map((item) => browserifyStyle(item));
+	// else, browserify the single item
 	return applyPxIfNeeded(
 		solveConflicts(
 			decoupleBidirectionalProps(
-				mergeStyles(styles)
+				omitStrangeProps(
+					style
+				)
 			)
 		)
+	);
+}
+
+module.exports = (...styles) => {
+	return mergeStyles(
+		browserifyStyle(styles)
 	);
 };

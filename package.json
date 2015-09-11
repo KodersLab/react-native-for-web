@@ -1,6 +1,6 @@
 {
   "name": "react-native-for-web",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "A set of classes and react components to make work your react-native app in a browser. (with some limitations obviously)",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
@@ -9,7 +9,8 @@
     "build:styles": "gulp styles",
     "build:lib": "babel src --out-dir lib",
     "build": "npm run build:lib && npm run build:styles",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run clean && npm run build",
+    "version": "npm run build"
   },
   "repository": {
     "type": "git",
