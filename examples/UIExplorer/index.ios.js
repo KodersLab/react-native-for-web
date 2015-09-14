@@ -10,7 +10,9 @@ var EXAMPLES = [
   require('./examples/ScrollViewExample'),
   require('./examples/TextInputExample'),
   require('./examples/PickerIOSExample'),
-  require('./examples/AsyncStorageExample')
+  require('./examples/AsyncStorageExample'),
+  require('./examples/PointerEventsExample'),
+  require('./examples/LayoutExample')
 ];
 
 class App extends React.Component{
@@ -45,6 +47,8 @@ class App extends React.Component{
   renderExample(){
     var {example: {title, description, examples}} = this.state;
     var examplesElements = [];
+    
+    if(!examples) examples = [ {render: () => <this.state.example />} ];
 
     for(var i = 0; i < examples.length; i++){
       var example = examples[i];
