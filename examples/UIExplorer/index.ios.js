@@ -12,7 +12,8 @@ var EXAMPLES = [
   require('./examples/PickerIOSExample'),
   require('./examples/AsyncStorageExample'),
   require('./examples/PointerEventsExample'),
-  require('./examples/LayoutExample')
+  require('./examples/LayoutExample'),
+  require('./examples/LayoutEventsExample')
 ];
 
 class App extends React.Component{

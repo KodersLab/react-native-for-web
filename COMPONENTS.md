@@ -1,0 +1,162 @@
+
+----------
+## Supported Classes & Components
+
+ - [X] StyleSheet
+   - [X] create
+
+ - [X] AppRegistry
+   - [X] getAppKeys
+   - [X] registerComponent
+   - [X] registerConfig
+   - [X] registerRunnable
+   - [X] runApplication
+   
+ - [X] AsyncStorage
+   - [X] getItem
+   - [X] setItem
+   - [X] removeItem
+   - [X] mergeItem
+   - [X] clear
+   - [X] getAllKeys
+   - [X] multiGet
+   - [X] multiSet
+   - [X] multiRemove
+   - [X] multiMerge
+
+ - [ ] View
+   - [X] accessible *not planned to support*
+   - [X] accessibilityLabel *not planned to support*
+   - [X] accessibilityComponentType *not planned to support*
+   - [X] accessibilityLiveRegion *not planned to support*
+   - [X] accessibilityTraits *not planned to support*
+   - [X] onAcccessibilityTap *not planned to support*
+   - [X] onMagicTap *not planned to support*
+   - [X] testID *not planned to support*
+   - [ ] onMoveShouldSetResponder
+   - [ ] onResponderGrant
+   - [ ] onResponderMove
+   - [ ] onResponderReject
+   - [ ] onResponderRelease
+   - [ ] onResponderTerminate
+   - [ ] onResponderTerminationRequest
+   - [ ] onStartShouldSetResponder
+   - [ ] onStartShouldSetResponderCapture
+   - [X] onLayout
+   - [X] pointerEvents
+   - [X] style
+   - [X] removeClippedSubviews *not planned to support*
+   - [X] renderToHardwareTextureAndroid *not planned to support*
+   - [X] shouldRasterizeIOS *not planned to support*
+   - [ ] collapsable
+
+ - [ ] Text
+   - [ ] numberOfLines
+   - [X] onLayout
+   - [X] onPress
+   - [X] suppressHighlighting
+   - [X] style
+   - [X] testID
+   - [ ] allowFontScaling
+
+ - [ ] Image
+   - [X] onLayout
+   - [X] resizeMode
+   - [X] source
+   - [X] style
+   - [X] testID
+   - [X] accessibilityLabel *not planned to support*
+   - [X] accessible *not planned to support*
+   - [ ] capInsets
+   - [X] defaultSource
+   - [X] onError
+   - [X] onLoad
+   - [X] onLoadEnd
+   - [X] onLoadStart
+   - [X] onProgress
+   
+ - [ ] ScrollView
+   - [ ] alwaysBounceHorizontal
+   - [ ] alwaysBounceVertical
+   - [ ] automaticallyAdjustContentInsets
+   - [ ] bounces
+   - [ ] bouncesZoom
+   - [ ] canCancelContentTouches
+   - [ ] centerContent
+   - [X] contentContainerStyle
+   - [ ] contentInset
+   - [ ] contentOffset
+   - [ ] decelerationRate
+   - [ ] directionalLockEnabled
+   - [X] horizontal
+   - [ ] keyboardDismissMode
+   - [ ] keyboardShouldPersistTaps
+   - [ ] maximumZoomScale
+   - [ ] minimumZoomScale
+   - [ ] onScroll
+   - [ ] onScrollAnimationEnd
+   - [ ] pagingEnabled
+   - [ ] removeClippedSubviews
+   - [ ] scrollEnabled
+   - [ ] scrollEventThrottle
+   - [ ] scrollIndicatorInsets
+   - [ ] scrollsToTop
+   - [ ] showsHorizontalScrollIndicator
+   - [ ] showsVerticalScrollIndicator
+   - [ ] stickyHeaderIndices
+   - [X] style
+   - [ ] zoomScale
+
+ - [ ] TextInput
+   - [ ] autoCapitalize
+   - [ ] autoCorrect
+   - [X] autoFocus
+   - [ ] clearButtonMode
+   - [X] clearTextOnFocus
+   - [X] defaultValue
+   - [X] editable
+   - [ ] enablesReturnKeyAutomatically
+   - [ ] keyboardType
+   - [ ] maxLength
+   - [X] multiline
+   - [X] onBlur
+   - [X] onChange
+   - [X] onChangeText
+   - [ ] onEndEditing
+   - [X] onFocus
+   - [X] onLayout
+   - [ ] onSubmitEditing
+   - [X] placeholder
+   - [ ] placeholderTextColor
+   - [ ] returnKeyType
+   - [ ] secureTextEntry
+   - [X] selectTextOnFocus
+   - [ ] selectionState
+   - [X] style
+   - [X] testID
+   - [X] textAlign
+   - [ ] textAlignVertical
+   - [ ] underlineColorAndroid
+   - [X] value
+
+ - [ ] TouchableHighlight
+   - [ ] activeOpacity
+   - [ ] onHideUnderlay
+   - [ ] onShowUnderlay
+   - [X] style
+   - [ ] underlayColor
+
+ - [X] TouchableOpacity
+   - [X] ...TouchableWithoutFeedback properties
+   - [X] style *as of 0.10.0*
+   - [X] activeOpacity
+
+ - [X] TouchableWithoutFeedback
+   - [X] accessible *not planned to support*
+   - [X] delayLongPress
+   - [X] delayPressIn
+   - [X] delayPressOut
+   - [X] onLongPress
+   - [X] onPress
+   - [X] onPressIn
+   - [X] onPressOut

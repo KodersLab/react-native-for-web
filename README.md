@@ -5,6 +5,7 @@ A set of classes and react components to make work your react-native app in a br
  - [Slack channel on reactiflux!](https://reactiflux.slack.com/messages/react-native-for-web/details/)
  - [GitHub repo](https://github.com/KodersLab/react-native-for-web)
  - [Read the docs](http://mattiamanzati.gitbooks.io/react-native-for-web/content/)
+ - [Supported components list](http://mattiamanzati.gitbooks.io/react-native-for-web/content/docs/supported_components_&_props.html)
 
 ### WARNING!
 This package is in beta version! API will not change (as we are emulating the react-native ones) but lots of components or properties could be missing at the moment.
