@@ -2,6 +2,7 @@ var React = require('react');
 var Radium = require('radium');
 var browserifyStyle = require('../../utils/style/browserify');
 var mergeStyles = require('../../utils/style/mergeStyles');
+var wrapLayout = require('../../utils/layout/wrapper');
 
 class Image extends React.Component{
   constructor(props){
@@ -130,7 +131,7 @@ class Image extends React.Component{
   }
 }
 
-Image = Radium(Image);
+Image = wrapLayout(Radium(Image));
 
 Image.resizeMode = {
   cover: 'cover',

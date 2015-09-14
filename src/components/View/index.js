@@ -1,6 +1,7 @@
 var React = require('react');
 var Radium = require('radium');
-var browserifyStyle = require('../../utils/style/browserify')
+var browserifyStyle = require('../../utils/style/browserify');
+var wrapLayout = require('../../utils/layout/wrapper');
 
 class View extends React.Component{
 	render(){
@@ -21,4 +22,4 @@ class View extends React.Component{
 }
 
 // export the component wrapped in radium
-module.exports = Radium(View);
+module.exports = wrapLayout(Radium(View));

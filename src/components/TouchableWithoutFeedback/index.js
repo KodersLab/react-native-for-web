@@ -3,6 +3,7 @@ var {findDOMNode} = require('react-dom');
 var Radium = require('radium');
 var browserifyStyle = require('../../utils/style/browserify');
 var Touchable = require('../../utils/events/Touchable');
+var wrapLayout = require('../../utils/layout/wrapper');
 
 class TouchableWithoutFeedback extends React.Component{
   constructor(props){
@@ -99,4 +100,4 @@ var styles = {
   }
 };
 
-module.exports = Radium(TouchableWithoutFeedback);
+module.exports = wrapLayout(Radium(TouchableWithoutFeedback));

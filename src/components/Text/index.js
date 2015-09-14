@@ -3,6 +3,7 @@ var {findDOMNode} = require('react-dom');
 var Radium = require('radium');
 var browserifyStyle = require('../../utils/style/browserify');
 var Touchable = require('../../utils/events/Touchable');
+var wrapLayout = require('../../utils/layout/wrapper');
 
 class Text extends React.Component{
 	
@@ -66,4 +67,4 @@ class Text extends React.Component{
 }
 
 // export the component wrapped in radium
-module.exports = Radium(Text);
+module.exports = wrapLayout(Radium(Text));

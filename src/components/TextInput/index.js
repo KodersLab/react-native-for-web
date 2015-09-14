@@ -1,6 +1,7 @@
 var React = require('react');
 var Radium = require('radium');
 var browserifyStyle = require('../../utils/style/browserify');
+var wrapLayout = require('../../utils/layout/wrapper');
 
 class TextInput extends React.Component{
   // onChange and onChangeText support
@@ -76,4 +77,4 @@ class TextInput extends React.Component{
   }
 }
 
-module.exports = Radium(TextInput);
+module.exports = wrapLayout(Radium(TextInput));
