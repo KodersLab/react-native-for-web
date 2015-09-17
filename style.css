@@ -142,6 +142,34 @@ span {
 #app .image.resize-mode-none {
   background-size: none;
 }
+#app .image > .cap-insets-tl,
+#app .image > .cap-insets-tr,
+#app .image > .cap-insets-bl,
+#app .image > .cap-insets-br {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: none;
+}
+#app .image > .cap-insets-tl {
+  top: 0px;
+  left: 0px;
+  background-position: top left;
+}
+#app .image > .cap-insets-tr {
+  top: 0px;
+  right: 0px;
+  background-position: top right;
+}
+#app .image > .cap-insets-bl {
+  bottom: 0px;
+  left: 0px;
+  background-position: bottom left;
+}
+#app .image > .cap-insets-br {
+  bottom: 0px;
+  right: 0px;
+  background-position: bottom right;
+}
 #app .scroll-view {
   box-sizing: border-box;
   position: relative;

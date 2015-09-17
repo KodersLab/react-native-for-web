@@ -6,6 +6,7 @@
 	background-position: center center;
 	background-size: cover;
   
+  	// handle resize mode
 	&.resize-mode-cover{
 		background-size: cover;
 	}
@@ -17,5 +18,33 @@
 	}
 	&.resize-mode-none{
 		background-size: none;
+	}
+	
+	// handle capInsets
+	& > .cap-insets-tl, & > .cap-insets-tr, & > .cap-insets-bl, & > .cap-insets-br{
+		position: absolute;
+		background-repeat: no-repeat;
+		background-size: none;
+	}
+	
+	& > .cap-insets-tl{
+		top: 0px;
+		left: 0px;
+		background-position: top left;
+	}
+	& > .cap-insets-tr{
+		top: 0px;
+		right: 0px;
+		background-position: top right;
+	}
+	& > .cap-insets-bl{
+		bottom: 0px;
+		left: 0px;
+		background-position: bottom left;
+	}
+	& > .cap-insets-br{
+		bottom: 0px;
+		right: 0px;
+		background-position: bottom right;
 	}
 }

@@ -100,7 +100,7 @@ class Image extends React.Component{
   // actual image rendering
   render(){
     // deconstruct supported properties
-    var {source: {uri}, defaultSource, resizeMode, style, children, 
+    var {source: {uri}, defaultSource, resizeMode, capInsets, style, children, 
       onLoad, onLoadStart, onLoadEnd, onProgress, onError, ...props} = this.props;
       
     // default classNames
@@ -124,8 +124,21 @@ class Image extends React.Component{
     var backgroundImage = typeof uri === 'undefined' || !this.state.loaded ? defaultBackgroundImage : 'url(' + uri + ')';
 
     // TODO: handle tintColor via canvas image manipulation if setted
+    
+    // WIP
+    // if image is loaded and capInsets is set
+    var insetEls = null;
+    if(this.state.loaded && capInsets){
+      insetEls = [
+        <div key="tl" className="cap-insets-tl" style={{backgroundImage, width: capInsets.left, height: capInsets.top}} />,
+        <div key="tr" className="cap-insets-tr" style={{backgroundImage, width: capInsets.right, height: capInsets.top}} />,
+        <div key="bl" className="cap-insets-bl" style={{backgroundImage, width: capInsets.left, height: capInsets.bottom}} />,
+        <div key="br" className="cap-insets-br" style={{backgroundImage, width: capInsets.right, height: capInsets.bottom}} />
+      ]
+    }
 
     return <div {...props} className={classNames.join(' ')} style={browserifyStyle({backgroundImage}, style)}>
+      {insetEls}
       {children}
     </div>;
   }
