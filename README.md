@@ -6,10 +6,14 @@ A set of classes and react components to make work your react-native app in a br
  - [GitHub repo](https://github.com/KodersLab/react-native-for-web)
  - [Read the docs](http://mattiamanzati.gitbooks.io/react-native-for-web/content/)
  - [Supported components list](http://mattiamanzati.gitbooks.io/react-native-for-web/content/docs/supported_components_&_props.html)
-
-### WARNING!
-This package is in beta version! API will not change (as we are emulating the react-native ones) but lots of components or properties could be missing at the moment.
-We encourage you to help us by reporting those errors or PR implementation of the missing ones! :D
+ 
+### Why use react-native-for-web?
+ - To **reuse your dumb components and your styles** in the web admin version of your app (you can them rewrite or extend them after, when you have spread time to spend on them and the deadline is passed)
+ - To **target react-native unsupported platforms** with no code changes via cordova; smart tvs, windows phone, desktop apps, chromebook, firefox os, etc...
+ - To have a **temporary non-iOS version for other platforms** of your app, and then refine and extend the generated views after the app deadline
+ - For **low-budget projects with multiple platforms as target**, you can choose iOS as a "master platform" and roll out the other version as webapp, when the client will have funds, you can enanche them 
+ - To **develop using non-OSX PCs**, like Windows or Linux, since the majority of the debug or coding error of your app will be in the data-controller layer or in view data binding
+ - **Browsers are a more friendly environment** for standard apps that does'nt require too much mobile-device features
 
 ### What limitations?
 Since it is all plain JavaScript, any native binary module won't be supported.
@@ -52,3 +56,7 @@ Move into the package folder and run in your terminal:
 ```
 npm run build
 ```
+
+### WARNING!
+This package is in beta version! API will not change (as we are emulating the react-native ones) but lots of components or properties could be missing at the moment.
+We encourage you to help us by reporting those errors or PR implementation of the missing ones! :D
