@@ -9,6 +9,7 @@ module.exports = {
 	AppRegistry: require('./classes/AppRegistry'),
 	PixelRatio: require('./classes/PixelRatio'),
 	AsyncStorage: require('./classes/AsyncStorage'),
+	DeviceEventEmitter: require('./classes/DeviceEventEmitter'),
 	
 	// export the components
 	View: require('./components/View'),
