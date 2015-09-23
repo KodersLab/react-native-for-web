@@ -28,7 +28,10 @@
   "homepage": "https://github.com/KodersLab/react-native-for-web#readme",
   "dependencies": {
     "eventemitter3": "^1.1.1",
-    "radium": "^0.13.8"
+    "fbjs": "^0.2.1",
+    "radium": "^0.13.8",
+    "react-native": "git://github.com/facebook/react-native.git",
+    "react-native-animated": "file:./node_modules/react-native/Libraries/Animated/release"
   },
   "peerDependencies": {
     "react": "^0.14.0-beta3",

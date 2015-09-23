@@ -60,3 +60,6 @@ npm run build
 ### WARNING!
 This package is in beta version! API will not change (as we are emulating the react-native ones) but lots of components or properties could be missing at the moment.
 We encourage you to help us by reporting those errors or PR implementation of the missing ones! :D
+
+### Thanks
+Thanks to the Facebook team for it's awesome React-Native framework!

@@ -10,6 +10,8 @@ module.exports = {
 	PixelRatio: require('./classes/PixelRatio'),
 	AsyncStorage: require('./classes/AsyncStorage'),
 	DeviceEventEmitter: require('./classes/DeviceEventEmitter'),
+	Animated: require('./classes/Animated'),
+	Easing: require('./classes/Animated/lib/Easing'),
 	
 	// export the components
 	View: require('./components/View'),
