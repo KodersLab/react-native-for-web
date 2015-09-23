@@ -41,6 +41,10 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
 }
 #app .view.pointer-events-none,
 #app .view.pointer-events-box-none,
@@ -81,9 +85,10 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
-  font-family: Helvetica;
-  font-size: 14px;
-  font-weight: 100;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
   background: transparent;
   outline: 0 none;
 }
@@ -117,6 +122,10 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -132,6 +141,34 @@ span {
 }
 #app .image.resize-mode-none {
   background-size: none;
+}
+#app .image > .cap-insets-tl,
+#app .image > .cap-insets-tr,
+#app .image > .cap-insets-bl,
+#app .image > .cap-insets-br {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: none;
+}
+#app .image > .cap-insets-tl {
+  top: 0px;
+  left: 0px;
+  background-position: top left;
+}
+#app .image > .cap-insets-tr {
+  top: 0px;
+  right: 0px;
+  background-position: top right;
+}
+#app .image > .cap-insets-bl {
+  bottom: 0px;
+  left: 0px;
+  background-position: bottom left;
+}
+#app .image > .cap-insets-br {
+  bottom: 0px;
+  right: 0px;
+  background-position: bottom right;
 }
 #app .scroll-view {
   box-sizing: border-box;
@@ -154,6 +191,10 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
   -webkit-flex-shrink: 1;
       -ms-flex-negative: 1;
           flex-shrink: 1;
@@ -190,9 +231,10 @@ span {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
-  font-family: Helvetica;
-  font-size: 14px;
-  font-weight: 100;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
 }
 
 /*# sourceMappingURL=style.css.map */

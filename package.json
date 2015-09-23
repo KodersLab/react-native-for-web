@@ -1,6 +1,6 @@
 {
   "name": "react-native-for-web",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A set of classes and react components to make work your react-native app in a browser. (with some limitations obviously)",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
@@ -28,7 +28,10 @@
   "homepage": "https://github.com/KodersLab/react-native-for-web#readme",
   "dependencies": {
     "eventemitter3": "^1.1.1",
-    "radium": "^0.13.8"
+    "fbjs": "^0.2.1",
+    "radium": "^0.13.8",
+    "react-native": "git://github.com/facebook/react-native.git",
+    "react-native-animated": "file:./node_modules/react-native/Libraries/Animated/release"
   },
   "peerDependencies": {
     "react": "^0.14.0-beta3",

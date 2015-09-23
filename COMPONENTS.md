@@ -93,12 +93,12 @@
    - [ ] keyboardShouldPersistTaps
    - [ ] maximumZoomScale
    - [ ] minimumZoomScale
-   - [ ] onScroll
+   - [X] onScroll
    - [ ] onScrollAnimationEnd
    - [ ] pagingEnabled
    - [ ] removeClippedSubviews
    - [ ] scrollEnabled
-   - [ ] scrollEventThrottle
+   - [X] scrollEventThrottle
    - [ ] scrollIndicatorInsets
    - [ ] scrollsToTop
    - [ ] showsHorizontalScrollIndicator

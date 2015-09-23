@@ -13,7 +13,8 @@ var EXAMPLES = [
   require('./examples/AsyncStorageExample'),
   require('./examples/PointerEventsExample'),
   require('./examples/LayoutExample'),
-  require('./examples/LayoutEventsExample')
+  require('./examples/LayoutEventsExample'),
+  require('./examples/AnimatedExample')
 ];
 
 class App extends React.Component{
