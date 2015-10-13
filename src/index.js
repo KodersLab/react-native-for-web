@@ -12,6 +12,7 @@ module.exports = {
 	DeviceEventEmitter: require('./classes/DeviceEventEmitter'),
 	Animated: require('./classes/Animated'),
 	Easing: require('./classes/Animated/lib/Easing'),
+    Platform: require('./classes/Platform'),
 	
 	// export the components
 	View: require('./components/View'),
