@@ -32,8 +32,8 @@
     "radium": "^0.13.8"
   },
   "peerDependencies": {
-    "react": "^0.14.0-beta3",
-    "react-dom": "^0.14.0-beta3"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
