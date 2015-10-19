@@ -25,5 +25,6 @@ module.exports = {
 	PickerIOS: require('./components/PickerIOS'),
 	
 	// todo components
-	TouchableHighlight: require('./components/TouchableWithoutFeedback')
+	TouchableHighlight: require('./components/TouchableWithoutFeedback'),
+	NativeModules: {}
 };
