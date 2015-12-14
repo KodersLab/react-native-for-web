@@ -2,7 +2,6 @@ React Native for Web
 =======
 
 A set of classes and react components to make work your react-native app in a browser. (with some limitations obviously)
- - [Slack channel on reactiflux!](https://reactiflux.slack.com/messages/react-native-for-web/details/)
  - [GitHub repo](https://github.com/KodersLab/react-native-for-web)
  - [Read the docs](http://mattiamanzati.gitbooks.io/react-native-for-web/content/)
  - [Supported components list](http://mattiamanzati.gitbooks.io/react-native-for-web/content/docs/supported_components_&_props.html)
