@@ -10,7 +10,7 @@ A set of classes and react components to make work your react-native app in a br
  - To **reuse your dumb components and your styles** in the web admin version of your app (you can them rewrite or extend them after, when you have spread time to spend on them and the deadline is passed)
  - To **target react-native unsupported platforms** with no code changes via cordova; smart tvs, windows phone, desktop apps, chromebook, firefox os, etc...
  - To have a **temporary non-iOS version for other platforms** of your app, and then refine and extend the generated views after the app deadline
- - For **low-budget projects with multiple platforms as target**, you can choose iOS as a "master platform" and roll out the other version as webapp, when the client will have funds, you can enanche them 
+ - For **low-budget projects with multiple platforms as target**, you can choose iOS as a "master platform" and roll out the other version as webapp. Then when the client has additional funds, you can enhance them 
  - To **develop using non-OSX PCs**, like Windows or Linux, since the majority of the debug or coding error of your app will be in the data-controller layer or in view data binding
  - **Browsers are a more friendly environment** for standard apps that does'nt require too much mobile-device features
 
